@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'accounts',
+
+    'main',
+    'group_control',
 ]
 
 MIDDLEWARE = [

@@ -5,5 +5,8 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('', login_check, name='login'),
+    path('logout/', logout, name='logout'),
+    path('signup/', signup, name='signup'),
+    path('findPw/', findPw, name=''),
 
 ]

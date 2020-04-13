@@ -20,4 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls', namespace='accounts')),
     path('', include('allauth.urls')),
+
+    path('main/', include('main.urls', namespace="main")),
+    path('group_control/', include('group_control.urls', namespace="group_control")),
 ]
