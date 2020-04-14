@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>캡스톤항 진수호</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,19 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <style>
-    .listItem {
-    display: block;
-    text-decoration: none;
-    color: #333;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; 
-}
-.listItem:hover {
-    text-decoration: underline;
-}
-  </style>
+  
   <script language="javascript">
     var today = new Date(); // 오늘 날짜
     var date = new Date();
@@ -111,7 +99,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">캡스톤항 진수호 </div>
       </a>
 
       <!-- Divider -->
@@ -136,7 +124,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
+          <span>설정</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -148,22 +136,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
-
+      
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -173,37 +146,20 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
+     
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+        <a class="nav-link" href="#">
+          ※ <span>공지사항</span></a>
       </li>
+
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>퀘스트</span></a>
       </li>
 
       <!-- Divider -->
@@ -538,8 +494,9 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  
                   <h6 class="m-0 font-weight-bold text-primary">일정</h6>
-                 
+                  <button type="button" ><span aria-hidden="true"data-toggle="modal" data-target="#addModal">+</span></button>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -567,6 +524,41 @@
           <!-- Content Row -->
           <div class="row">
 
+
+
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">퀘스트 목록</h6>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group" id="cautionList">
+                    <li class="list-group-item" id="listItem">
+                      <h4><a href="#">10일 까지 프론트 디자인 하지!!</a></h4>
+                     
+                    </li>
+                    <li class="list-group-item" id="listItem">
+                      <h4><a href="#">11일까지 홈페이지 다 올리기!!</a></h4>
+                      
+                    </li>
+                    <li class="list-group-item" id="listItem">
+                      <h4><a href= "#">왜그러냐!</a></h4>
+                      
+                    </li>
+                    
+                  </ul>
+                  
+                  
+                  
+                </div>
+              </div>
+
+              <!-- Color System -->
+             
+            </div>
+
             <!-- Content Column -->
             <div class="col-lg-6 mb-4">
 
@@ -576,20 +568,23 @@
                   <h6 class="m-0 font-weight-bold text-primary">순위</h6>
                 </div>
                 <div class="card-body">
-                  <h4 class="small font-weight-bold">성준 <span class="float-right">20%</span></h4>
+                 
+                  <h4 class="small font-weight-bold">진수 <span class="float-right">Complete!</span></h4>
                   <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success " role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
+
                   <h4 class="small font-weight-bold">세환 <span class="float-right">40%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                   
-                  
-                  <h4 class="small font-weight-bold">진수 <span class="float-right">Complete!</span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  <h4 class="small font-weight-bold">성준 <span class="float-right">20%</span></h4>
+                  <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
+                  
+                  
                 </div>
               </div>
 
@@ -597,6 +592,10 @@
              
             </div>
 
+
+
+
+            
             <div class="col-lg-6 mb-4">
 
               <!-- Illustrations -->
@@ -607,11 +606,11 @@
                 <div class="card-body">
                   <ul class="list-group" id="cautionList">
                     <li class="list-group-item" id="listItem">
-                      <h4>25일까지 프론트 만들어와!!!By진수</h4>
+                      <h4><a href="#">25일까지 프론트 만들어와!!!By진수</a></h4>
                      
                     </li>
                     <li class="list-group-item" id="listItem">
-                      <h4>다 꺼저 나혼자 만들거야 by 진수</h4>
+                      <h4><a href="#">다 꺼저 나혼자 만들거야 by 진수</a></h4>
                       
                     </li>
                     
@@ -652,6 +651,54 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+
+  <!-- 모달 영역 -->
+  <div class="modal fade"  id="addModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">일정 추가</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">제목</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">날짜</span>
+            </div>
+            <input type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">시간</span>
+            </div>
+            <input type="text" class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">내용</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+          <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
