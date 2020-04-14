@@ -7,7 +7,7 @@ def showGroup(request):
     # 각 멤버의 성과를 그래프로 표시
     # 공지 표시
     # 과제 표시
-    return
+    return render(request, "group_control/index.html")
 
 def shareReward(request):
     # 상금 분배하는 기능
