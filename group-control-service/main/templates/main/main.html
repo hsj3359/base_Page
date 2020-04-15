@@ -9,6 +9,9 @@
 </head>
 <body>
 <h1> 현재 사용자는 {{username}} 입니다.</h1>
-<a href="../../logout">로그아웃</a>
+<a href="../../logout">로그아웃</a><br>
+{% for j in join %}
+{{j.group.title}}
+{% endfor %}
 </body>
 </html>

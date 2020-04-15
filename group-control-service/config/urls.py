@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('allauth.urls')),
 
     path('main/', include('main.urls', namespace="main")),
-    path('group_control/', include('group_control.urls', namespace="group_control")),
+    path('group_control/<int:pk>/', include('group_control.urls', namespace="group_control")),
 ]
