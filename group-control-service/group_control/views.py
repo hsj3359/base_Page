@@ -1,13 +1,31 @@
 from django.shortcuts import render
+from main.models import *
+from .models import *
 
-def showGroup(request):
+def showGroup(request, pk):
     # 그룹에 관한 데이터를 보여주는 기능
     # 일정을 달력과 리스트의 형태로 표시
     # 개인의 능력치를 수치나 그래프로 표시
     # 각 멤버의 성과를 그래프로 표시
     # 공지 표시
     # 과제 표시
-    return render(request, "group_control/index.html")
+    currGroup = Group.objects.get(id=pk)
+    currJoin = Join.objects.get(group=currGroup, user=request.user)
+    schedule = Schedule.objects.filter(group=currGroup)
+    notice = Notice.objects.filter(group=currGroup)
+    quest = Quest.objects.filter(join=currJoin)
+    questCount = 0
+    for q in quest:
+        questCount += 1
+    dict = {
+        'group':currGroup,
+        'join':currJoin,
+        'schedule':schedule,
+        'notice':notice,
+        'quest': quest,
+        'questCount': questCount,
+    }
+    return render(request, "group_control/index.html", dict)
 
 def shareReward(request):
     # 상금 분배하는 기능

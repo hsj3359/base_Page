@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Group, Join
 
 def index(request):
     # 그룹 목록 보여주기
@@ -6,9 +7,13 @@ def index(request):
         username = ""
         return render(request, 'main/main.html', {'username':username})
     else:
-        user = request.user
-        username = user.username
-    return  render(request, 'main/main.html', {'username':username})
+        username = request.user.username
+        join = Join.objects.filter(user=request.user)
+        dict = {
+            'username':username,
+            'join':join
+        }
+    return  render(request, 'main/main.html', dict)
 
 def createGroup(request):
     # 그룹 생성하기

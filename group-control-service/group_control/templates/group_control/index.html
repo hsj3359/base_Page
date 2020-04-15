@@ -173,7 +173,6 @@
 
     </ul>
     <!-- End of Sidebar -->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -399,7 +398,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">경험치</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">EXP 215,000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">EXP {{join.exp}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -442,7 +441,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">퀘스트</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{questCount}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -502,18 +501,14 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <ul class="list-group">
+                    {% for sche in schedule %}
                     <li class="list-group-item">
-                      <h3>4월 15일</h3>
+                      <h3>{{sche.date | date:'Y-m-d'}}</h3>
                       <ul>
-                        <li>선거일!</li>
+                        <li>{{sche.title}}</li>
                       </ul>
                     </li>
-                    <li class="list-group-item">
-                      <h3>4월 22일</h3>
-                      <ul>
-                        <li>캡스톤발표!</li>
-                      </ul>
-                    </li>
+                    {% endfor %}
                     
                   </ul>
                   
@@ -536,23 +531,12 @@
                 </div>
                 <div class="card-body">
                   <ul class="list-group" id="cautionList">
+                    {% for q in quest %}
                     <li class="list-group-item" id="listItem">
-                      <h4><a href="{% static '#' %}">10일 까지 프론트 디자인 하지!!</a></h4>
-                     
+                      <h4><a href="{% static '#' %}">{{q.title}}</a></h4>
                     </li>
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href="{% static '#' %}">11일까지 홈페이지 다 올리기!!</a></h4>
-                      
-                    </li>
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href= "{% static '#' %}">왜그러냐!</a></h4>
-                      
-                    </li>
-                    
+                    {% endfor %}
                   </ul>
-                  
-                  
-                  
                 </div>
               </div>
 
@@ -606,15 +590,11 @@
                 </div>
                 <div class="card-body">
                   <ul class="list-group" id="cautionList">
+                    {% for n in notice %}
                     <li class="list-group-item" id="listItem">
-                      <h4><a href="{% static '#' %}">25일까지 프론트 만들어와!!!By진수</a></h4>
-                     
+                      <h4><a href="{% static '#' %}">{{n.title}}</a></h4>
                     </li>
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href="{% static '#' %}">다 꺼저 나혼자 만들거야 by 진수</a></h4>
-                      
-                    </li>
-                    
+                    {% endfor %}
                   </ul>
                   
 
