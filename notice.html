@@ -9,81 +9,18 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>캡스톤항 진수호</title>
+  <title>퀘스트</title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  
-  <script language="javascript">
-    var today = new Date(); // 오늘 날짜
-    var date = new Date();
-  
-    function build()
-    {
-        var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
-        var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
-        var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
-        var yearmonth = document.getElementById("today"); //  년도와 월 출력할곳
-        yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
-        // 남은 테이블 줄 삭제
-        while (tbcal.rows.length > 2) 
-        {
-            tbcal.deleteRow(tbcal.rows.length - 1);
-        }
-        var row = null;
-        row = tbcal.insertRow();
-        var cnt = 0;
- 
-        // 1일 시작칸 찾기
-        for (i = 0; i < nMonth.getDay(); i++) 
-        {
-            cell = row.insertCell();
-            cnt = cnt + 1;
-        }
- 
-        // 달력 출력
-        for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
-        { 
-            cell = row.insertCell();
-            cell.innerHTML = i;
-            cnt = cnt + 1;
-            if (cnt % 7 == 1) {//일요일 계산
-                cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
-            }
-            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
-                row = calendar.insertRow();// 줄 추가
-            }
-            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
-            {
-                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-            }
-        }
-        while(cnt%7!=0){
-            cell = row.insertCell();
-            cell.innerHTML = "";
-            cnt = cnt + 1;
-            if (cnt % 7 == 1) {//일요일 계산
-                cell.innerHTML = "";//일요일에 색
-            }
-            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                cell.innerHTML = "" ;//토요일에 색
-                row = calendar.insertRow();// 줄 추가
-            }
-            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
-            {
-                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-            }
 
-        }
- 
-    }
-    
-</script>
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -361,266 +298,57 @@
 
         </nav>
         <!-- End of Topbar -->
-
+        <button type="button" data-toggle="modal" data-target="#creatModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3" style="float: right;"><i class="fas fa-download fa-sm text-white-50"></i>글쓰기</button>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">스탯</h1>
-          </div>
+          <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+          <p class="mb-4">호스트가 공지사항을 작성하고 구성원은 볼 수 있습니다.</p>
 
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">벌금</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦40,000</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
             </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">경험치</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">EXP 215,000</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">목표달성률</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                        </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">퀘스트</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Content Row -->
-
-          <div class="row">
-
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">달력</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <table id ="calendar" border="1px" style=" width : 100%; height : 100%; text-align: center;">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
                     <tr>
-                      <td colspan="7" id="today">오늘날짜</td>
+                      <th>제목</th>
+                      <th>종류</th>
+                      <th>작성자</th>
+                      <th>등록일</th>
+                      
                     </tr>
+                  </thead>
+                  <tfoot>
                     <tr>
-                      <td style="color: red;">일</td>
-                      <td>월</td>
-                      <td>화</td>
-                      <td>수</td>
-                      <td>목</td>
-                      <td>금</td>
-                      <td style="color : blue">토</td>
+                      <th>제목</th>
+                      <th>종류</th>
+                      <th>작성자</th>
+                      <th>등록일</th>
                     </tr>
-                    <tbody id="tableBody">
-
-                    </tbody>
-                  </table>
-                  <script>
-                    build();
-                  </script>
-                </div>
+                  </tfoot>
+                  <tbody>
+                   
+                    <tr id ="quest1" onclick="viewModal('너네 그렇게 하다 죽는다')" style="cursor: pointer;">
+                      <td>너네 그렇게 하다 죽는다</td>
+                      <td>공지</td>
+                      <td>호스트</td>
+                      <td>2020/04/15</td>
+                    </tr>
+                    <script>
+                      function viewModal(name){
+                        var modalName = document.getElementById("myModalLabel");
+                        modalName.innerHTML = name
+                        $('#questModal').modal('show');
+                      }
+                    </script>
+                  </tbody>
+                </table>
               </div>
-            </div>
-            
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  
-                  <h6 class="m-0 font-weight-bold text-primary">일정</h6>
-                  <button type="button" ><span aria-hidden="true"data-toggle="modal" data-target="#addModal">+</span></button>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <h3>4월 15일</h3>
-                      <ul>
-                        <li>선거일!</li>
-                      </ul>
-                    </li>
-                    <li class="list-group-item">
-                      <h3>4월 22일</h3>
-                      <ul>
-                        <li>캡스톤발표!</li>
-                      </ul>
-                    </li>
-                    
-                  </ul>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-
-
-            <div class="col-lg-6 mb-4">
-
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">퀘스트 목록</h6>
-                </div>
-                <div class="card-body">
-                  <ul class="list-group" id="cautionList">
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href="#">10일 까지 프론트 디자인 하지!!</a></h4>
-                     
-                    </li>
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href="#">11일까지 홈페이지 다 올리기!!</a></h4>
-                      
-                    </li>
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href= "#">왜그러냐!</a></h4>
-                      
-                    </li>
-                    
-                  </ul>
-                  
-                  
-                  
-                </div>
-              </div>
-
-              <!-- Color System -->
-             
-            </div>
-
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">순위</h6>
-                </div>
-                <div class="card-body">
-                 
-                  <h4 class="small font-weight-bold">진수 <span class="float-right">Complete!</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-success " role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-
-                  <h4 class="small font-weight-bold">세환 <span class="float-right">40%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  
-                  <h4 class="small font-weight-bold">성준 <span class="float-right">20%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  
-                  
-                </div>
-              </div>
-
-              <!-- Color System -->
-             
-            </div>
-
-
-
-
-            
-            <div class="col-lg-6 mb-4">
-
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
-                </div>
-                <div class="card-body">
-                  <ul class="list-group" id="cautionList">
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href="#">25일까지 프론트 만들어와!!!By진수</a></h4>
-                     
-                    </li>
-                    <li class="list-group-item" id="listItem">
-                      <h4><a href="#">다 꺼저 나혼자 만들거야 by 진수</a></h4>
-                      
-                    </li>
-                    
-                  </ul>
-                  
-
-                </div>
-              </div>
-
-              <!-- Approach -->
-             
             </div>
           </div>
 
@@ -650,54 +378,6 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-  <!-- 모달 영역 -->
-  <div class="modal fade"  id="addModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">일정 추가</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        </div>
-        <div class="modal-body">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">제목</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">날짜</span>
-            </div>
-            <input type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">시간</span>
-            </div>
-            <input type="text" class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-          
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">내용</span>
-            </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
-          <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -729,11 +409,79 @@
   <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="js/demo/datatables-demo.js"></script>
+
+
+<!-- 모달 영역 -->
+  <div id="questModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">모달 타이틀</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">죽어라!!</div>
+        
+        
+          
+        
+        
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">확인</button>
+          <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">퀘스트 생성</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">제목</span>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">종류</span>
+            </div>
+            <select class="form-control">
+              <option>공지사항</option>
+             
+            </select>
+          </div>
+
+        
+          
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">내용</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+          <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
 
 </body>
 
