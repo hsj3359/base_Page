@@ -27,6 +27,24 @@ def showGroup(request, pk):
     }
     return render(request, "group_control/index.html", dict)
 
+def showQuest(request, pk):
+    currGroup = Group.objects.get(id=pk)
+    currJoin = Join.objects.get(group=currGroup, user=request.user)
+    quest = Quest.objects.filter(join=currJoin)
+    dict = {
+        'quest':quest,
+    }
+    return render(request, 'group_control/notice.html', dict)
+
+def showNotice(request, pk):
+    currGroup = Group.objects.get(id=pk)
+    notice = Notice.objects.filter(group=currGroup)
+    dict = {
+        'notice': notice,
+    }
+    return render(request, 'group_control/notice.html', dict)
+    return
+
 def shareReward(request):
     # 상금 분배하는 기능
     return
