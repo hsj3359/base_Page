@@ -7,7 +7,7 @@ class QuestAdmin(admin.ModelAdmin):
 
 @admin.register(Schedule)
 class QuestAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date', 'created_at', 'group']
+    list_display = ['title', 'date', 'time', 'content', 'created_at', 'group']
 
 @admin.register(Notice)
 class QuestAdmin(admin.ModelAdmin):

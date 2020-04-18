@@ -533,7 +533,7 @@
                   <ul class="list-group" id="cautionList">
                     {% for q in quest %}
                     <li class="list-group-item" id="listItem">
-                      <h4><a href="{% static '#' %}">{{q.title}}</a></h4>
+                      <h4><a href="../showQuest">{{q.title}}</a></h4>
                     </li>
                     {% endfor %}
                   </ul>
@@ -592,7 +592,7 @@
                   <ul class="list-group" id="cautionList">
                     {% for n in notice %}
                     <li class="list-group-item" id="listItem">
-                      <h4><a href="{% static '#' %}">{{n.title}}</a></h4>
+                      <h4><a href="../showNotice">{{n.title}}</a></h4>
                     </li>
                     {% endfor %}
                   </ul>
@@ -637,30 +637,33 @@
   <div class="modal fade"  id="addModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <form method="post" action="{% url 'group_control:createSche' group.pk%}">
+          {% csrf_token %}
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">일정 추가</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         </div>
+
         <div class="modal-body">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">제목</span>
             </div>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
           </div>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">날짜</span>
             </div>
-            <input type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ sche_form.date.html_name }}" required="required" autofocus="autofocus" type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">시간</span>
             </div>
-            <input type="text" class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ sche_form.time.html_name }}" required="required" autofocus="autofocus" type="time" class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           
 
@@ -668,13 +671,15 @@
             <div class="input-group-prepend">
               <span class="input-group-text">내용</span>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <input name="{{ sche_form.content.html_name }}" required="required" autofocus="autofocus" class="form-control" aria-label="With textarea">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+          <!--<button type="submit" class="btn btn-primary" data-dismiss="modal">추가</button>-->
+          <button type="submit" class="btn btn-primary">추가</button>
           <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
         </div>
+          </form>
       </div>
     </div>
   </div>

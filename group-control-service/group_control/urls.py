@@ -7,6 +7,7 @@ urlpatterns = [
     path('showGroup/', showGroup, name='showGroup'),
     path('showQuest/', showQuest, name='showQuest'),
     path('showNotice/', showNotice, name='showNotice'),
+    path('createSche/', createSche, name='createSche'),
 
     path('shareReward/', shareReward, name='shareReward'),
 
@@ -14,7 +15,7 @@ urlpatterns = [
     path('modify/', modify, name='modify'),
     path('invite/', invite, name='invite'),
     path('retire/', retire, name='retire'),
-    path('createSche/', createSche, name='createSche'),
+
     path('createSub/', createSub, name='createSub'),
     path('createNote/', createNote, name='createNote'),
     path('approveSub/', approveSub, name='approveSub'),

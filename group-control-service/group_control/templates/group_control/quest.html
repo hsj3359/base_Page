@@ -342,8 +342,8 @@
                       <td>{{q.type}}</td>
                       <td>{{q.join.group.host}}</td>
                       <td>{{q.exp}}</td>
-                      <td>{{q.start}}</td>
-                      <td>{{q.end}}</td>
+                      <td>{{q.start | date:'Y-m-d'}}</td>
+                      <td>{{q.end | date:'Y-m-d'}}</td>
                     </tr>
                    {% endfor %}
                     <script>
