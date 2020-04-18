@@ -15,6 +15,7 @@ class Join(models.Model):
     role = models.CharField(max_length=50, default='member')
     exp = models.IntegerField(default=0)
     level = models.IntegerField(default=0)
+    penalty = models.IntegerField(default=0)
 
 
 

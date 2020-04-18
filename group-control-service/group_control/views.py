@@ -37,16 +37,22 @@ def showQuest(request, pk):
     currGroup = Group.objects.get(id=pk)
     currJoin = Join.objects.get(group=currGroup, user=request.user)
     quest = Quest.objects.filter(join=currJoin)
+    form = QuestForm()
     dict = {
+        'group': currGroup,
         'quest':quest,
+        'form':form,
     }
     return render(request, 'group_control/quest.html', dict)
 
 def showNotice(request, pk):
     currGroup = Group.objects.get(id=pk)
     notice = Notice.objects.filter(group=currGroup)
+    form = NoticeForm()
     dict = {
+        'group': currGroup,
         'notice': notice,
+        'form': form,
     }
     return render(request, 'group_control/notice.html', dict)
 
@@ -54,13 +60,37 @@ def createSche(request, pk):
     # 일정 생성 기능
     # 호스트 기능
     if request.method == 'POST':
-        print("create Schedule")
         form = ScheduleForm(request.POST)
         if form.is_valid():
             new_sche = form.save(commit=False)
             currGroup = Group.objects.get(id=pk)
-            print(new_sche.title)
             Schedule.objects.create(title=new_sche.title, date=new_sche.date, time=new_sche.time, group=currGroup)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def createQuest(request, pk):
+    # 과제 생성 기능
+    # 호스트 기능
+    if request.method == 'POST':
+        form = QuestForm(request.POST)
+        if form.is_valid():
+            newQue = form.save(commit=False)
+            currGroup = Group.objects.get(id=pk)
+            currJoin = Join.objects.get(group=currGroup, user=request.user)
+            Quest.objects.create(title=newQue.title, type=newQue.type, exp=newQue.exp, end=newQue.end, join=currJoin, content=newQue.content)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def createNotice(request, pk):
+    # 공지 작성 기능
+    # 호스트 기능
+    if request.method == 'POST':
+        print("createQuest!")
+        form = NoticeForm(request.POST)
+        if form.is_valid():
+            newNot = form.save(commit=False)
+            currGroup = Group.objects.get(id=pk)
+            Notice.objects.create(title=newNot.title, type=newNot.type, content=newNot.content, group=currGroup)
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -84,23 +114,9 @@ def retire(request):
     return
 
 
-def createQuest(request, pk):
-    # 과제 생성 기능
-    # 호스트 기능
-    if request.method == 'POST':
-        form = QuestForm(request.POST)
-        if form.is_valid():
-            new_Que = form.save(commit=False)
-            currGroup = Group.objects.get(id=pk)
-            Quest.objects.create(title=new_sche.title, date=new_sche.date, time=new_sche.time, group=currGroup)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return
 
-def createNote(request):
-    # 공지 작성 기능
-    # 호스트 기능
-    return
+
+
 
 def approveSub(request):
     # 과제 승인 기능

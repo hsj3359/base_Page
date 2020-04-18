@@ -342,7 +342,7 @@
                       <td>{{q.type}}</td>
                       <td>{{q.join.group.host}}</td>
                       <td>{{q.exp}}</td>
-                      <td>{{q.start | date:'Y-m-d'}}</td>
+                      <td>{{q.created_at | date:'Y-m-d'}}</td>
                       <td>{{q.end | date:'Y-m-d'}}</td>
                     </tr>
                    {% endfor %}
@@ -468,7 +468,8 @@
   
 
   <div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <form  method="post" action="{% url 'group_control:createQuest' group.pk%}" class="modal-dialog" role="document">
+      {% csrf_token %}
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">퀘스트 생성</h4>
@@ -479,13 +480,13 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">제목</span>
             </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">종류</span>
             </div>
-            <select class="form-control">
+            <select name="{{ form.type.html_name }}" required="required"  class="form-control">
               <option>일일 퀘스트</option>
               <option>주간 퀘스트</option>
               <option>월간 퀘스트</option>
@@ -498,14 +499,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">마감날짜</span>
             </div>
-            <input type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
+            <input  name="{{ form.end.html_name }}" required="required" autofocus="autofocus" type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">경험치</span>
             </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            <input  name="{{ form.exp.html_name }}" required="required" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           
 
@@ -513,15 +514,15 @@
             <div class="input-group-prepend">
               <span class="input-group-text">내용</span>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <input name="{{ form.content.html_name }}" required="required" type="text" class="form-control" aria-label="With textarea">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+          <button type="submit" class="btn btn-primary">추가</button>
           <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
   
 

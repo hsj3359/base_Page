@@ -6,9 +6,9 @@ class Quest(models.Model):
     type = models.CharField(max_length=50)
     exp = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    start = models.DateTimeField()
     end = models.DateTimeField()
     join = models.ForeignKey(Join, on_delete=models.CASCADE, default=0)
+    content = models.CharField(max_length=200, null=True)
 
     class Meta:
         ordering = ['created_at']
@@ -28,6 +28,8 @@ class Notice(models.Model):
     title = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, default=0)
+    type = models.CharField(max_length=50, null=True)
+    content = models.CharField(max_length=200, null=True)
 
     class Meta:
         ordering = ['created_at']

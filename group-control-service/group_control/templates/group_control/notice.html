@@ -335,7 +335,7 @@
                     <tr id ="quest1" onclick="viewModal('{{n.title}}')" style="cursor: pointer;">
                       <td>{{n.title}}</td>
                       <td>{{n.group.host}}</td>
-                      <td>{{n.created_at}}</td>
+                      <td>{{n.created_at | date:'Y-m-d'}}</td>
                     </tr>
                    {% endfor %}
                     <script>
@@ -424,12 +424,6 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         </div>
         <div class="modal-body">죽어라!!</div>
-        
-        
-          
-        
-        
-        
         <div class="modal-footer">
           <button type="button" class="btn btn-primary">확인</button>
           <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
@@ -442,8 +436,10 @@
   <div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <form method="post" action="{% url 'group_control:createNotice' group.pk%}">
+          {% csrf_token %}
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">퀘스트 생성</h4>
+          <h4 class="modal-title" id="myModalLabel">공지 생성</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         </div>
         <div class="modal-body">
@@ -451,31 +447,29 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">제목</span>
             </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ form.title.html_name }}" required="required" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">종류</span>
             </div>
-            <select class="form-control">
+            <select name="{{ form.type.html_name }}" required="required" class="form-control">
               <option>공지사항</option>
-             
             </select>
           </div>
 
-        
-          
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">내용</span>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <input name="{{ form.content.html_name }}" required="required" class="form-control" aria-label="With textarea">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+          <button type="submit" class="btn btn-primary">추가</button>
           <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
         </div>
+        </form>
       </div>
     </div>
   </div>

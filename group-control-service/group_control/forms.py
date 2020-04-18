@@ -21,9 +21,15 @@ class ScheduleForm(forms.ModelForm):
 class QuestForm(forms.ModelForm):
 
     class Meta:
-        model = Schedule
+        model = Quest
         fields = {'title', 'type', 'exp', 'end', 'content'}
         widgets = {
-            'date': DateInput(),
-            'time': TimeInput()
+            'end': DateInput(),
         }
+
+class NoticeForm(forms.ModelForm):
+
+    class Meta:
+        model = Notice
+        fields = {'title', 'type', 'content'}
+
