@@ -5,14 +5,17 @@ app_name = 'group_control'
 
 urlpatterns = [
     path('showGroup/', showGroup, name='showGroup'),
-    path('shareReward/', shareReward, name='shareReward'),
+    path('showQuest/', showQuest, name='showQuest'),
+    path('showNotice/', showNotice, name='showNotice'),
+    path('createSche/', createSche, name='createSche'),
+    path('createQuest/', createQuest, name='createQuest'),
+    path('createNotice/', createNotice, name='createNotice'),
 
+    path('shareReward/', shareReward, name='shareReward'),
     path('modify/', modify, name='modify'),
     path('invite/', invite, name='invite'),
     path('retire/', retire, name='retire'),
-    path('createSche/', createSche, name='createSche'),
-    path('createSub/', createSub, name='createSub'),
-    path('createNote/', createNote, name='createNote'),
+
     path('approveSub/', approveSub, name='approveSub'),
     path('approveFinal/', approveFinal, name='approveFinal'),
 

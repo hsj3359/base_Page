@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from main.models import *
 from .models import *
+from .forms import *
 
 def showGroup(request, pk):
     # 그룹에 관한 데이터를 보여주는 기능
@@ -11,12 +13,15 @@ def showGroup(request, pk):
     # 과제 표시
     currGroup = Group.objects.get(id=pk)
     currJoin = Join.objects.get(group=currGroup, user=request.user)
-    schedule = Schedule.objects.filter(group=currGroup)
-    notice = Notice.objects.filter(group=currGroup)
-    quest = Quest.objects.filter(join=currJoin)
-    questCount = 0
-    for q in quest:
-        questCount += 1
+    schedules = Schedule.objects.filter(group=currGroup)
+
+    notices = Notice.objects.filter(group=currGroup)
+    quests = Quest.objects.filter(join=currJoin)
+    sche_form = ScheduleForm()
+    questCount = len(quests)
+    schedule = schedules[0:2]
+    quest = quests[0:3]
+    notice = notices[0:2]
     dict = {
         'group':currGroup,
         'join':currJoin,
@@ -24,8 +29,70 @@ def showGroup(request, pk):
         'notice':notice,
         'quest': quest,
         'questCount': questCount,
+        'sche_form': sche_form,
     }
     return render(request, "group_control/index.html", dict)
+
+def showQuest(request, pk):
+    currGroup = Group.objects.get(id=pk)
+    currJoin = Join.objects.get(group=currGroup, user=request.user)
+    quest = Quest.objects.filter(join=currJoin)
+    form = QuestForm()
+    dict = {
+        'group': currGroup,
+        'quest':quest,
+        'form':form,
+    }
+    return render(request, 'group_control/quest.html', dict)
+
+def showNotice(request, pk):
+    currGroup = Group.objects.get(id=pk)
+    notice = Notice.objects.filter(group=currGroup)
+    form = NoticeForm()
+    dict = {
+        'group': currGroup,
+        'notice': notice,
+        'form': form,
+    }
+    return render(request, 'group_control/notice.html', dict)
+
+def createSche(request, pk):
+    # 일정 생성 기능
+    # 호스트 기능
+    if request.method == 'POST':
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            new_sche = form.save(commit=False)
+            currGroup = Group.objects.get(id=pk)
+            Schedule.objects.create(title=new_sche.title, date=new_sche.date, time=new_sche.time, group=currGroup)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def createQuest(request, pk):
+    # 과제 생성 기능
+    # 호스트 기능
+    if request.method == 'POST':
+        form = QuestForm(request.POST)
+        if form.is_valid():
+            newQue = form.save(commit=False)
+            currGroup = Group.objects.get(id=pk)
+            currJoin = Join.objects.get(group=currGroup, user=request.user)
+            Quest.objects.create(title=newQue.title, type=newQue.type, exp=newQue.exp, end=newQue.end, join=currJoin, content=newQue.content)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def createNotice(request, pk):
+    # 공지 작성 기능
+    # 호스트 기능
+    if request.method == 'POST':
+        print("createQuest!")
+        form = NoticeForm(request.POST)
+        if form.is_valid():
+            newNot = form.save(commit=False)
+            currGroup = Group.objects.get(id=pk)
+            Notice.objects.create(title=newNot.title, type=newNot.type, content=newNot.content, group=currGroup)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def shareReward(request):
     # 상금 분배하는 기능
@@ -45,20 +112,11 @@ def retire(request):
     # 강제 퇴장 기능
     # 호스트 기능
     return
-def createSche(request):
-    # 일정 생성 기능
-    # 호스트 기능
-    return
 
-def createSub(request):
-    # 과제 생성 기능
-    # 호스트 기능
-    return
 
-def createNote(request):
-    # 공지 작성 기능
-    # 호스트 기능
-    return
+
+
+
 
 def approveSub(request):
     # 과제 승인 기능
