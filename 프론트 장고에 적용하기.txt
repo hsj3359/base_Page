@@ -1,0 +1,9 @@
+1. 로그인, 로그아웃, 회원가입 관련 페이지
+- group-control-service -> accounts -> templates -> accounts 폴더 안에 넣으면 됨
+
+2. 메인 화면 관련 페이지(세환이가 만든거)
+- group-control-service -> main -> templates -> main 폴더 안에 넣으면 됨
+
+3. 그룹 관련 페이지(성준이가 만든거)
+- 그룹, 채팅, 학습노트, 공지 모두
+- group-control-service -> group_control -> templates -> group_control 폴더 안에 넣으면 됨
