@@ -1,0 +1,91 @@
+{% extends 'group_control/base.html' %}
+
+{% block head %}
+<!-- head 영역 -->
+  <title>Chat</title>
+<!-- /head 영역 -->
+{% endblock %}
+
+{% block content %}
+<!-- content 영역 -->
+  <div class="container-fluid" style="height: 80%;">
+
+          <!-- Page Heading -->
+          <table class="mt-3" border="1px" style="text-align: center; background-color: white;">
+            <tr>
+              <td style="width: 10%;">전체</td>
+              <td style="width: 10%;"> 진수</td>
+              <td style="width: 10%;">성준</td>
+              <td style="width: 10%;">세환</td>
+            </tr>
+          </table>
+          <div id="chat" style="height : 100%; " >
+            <div class="col-4  mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">진수</h5>
+                  <p class="card-text">다들 대가리 박아</p>
+                 </div>
+               </div>
+            </div>
+            <div class="col-4  mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">성준</h5>
+                  <p class="card-text">왜요?</p>
+                 </div>
+               </div>
+            </div>
+            <div class="col-4  mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">진수</h5>
+                  <p class="card-text">그냥 대가리 박아</p>
+                 </div>
+               </div>
+            </div>
+            <div class="col-4  mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">성준</h5>
+                  <p class="card-text">왜요?</p>
+                 </div>
+               </div>
+            </div>
+            <div class="col-4 mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">진수</h5>
+                  <p class="card-text">박아주라</p>
+                 </div>
+               </div>
+            </div>
+  
+            <div class="col-4  mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">성준</h5>
+                  <p class="card-text">왜요?</p>
+                 </div>
+               </div>
+            </div>
+            <div class="col-4  mt-3 mb-1">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">세환</h5>
+                  <p class="card-text">왜요?</p>
+                 </div>
+               </div>
+            </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">내용</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <button>전송</button>
+          </div>
+         </div>
+        </div>
+<!-- /content 영역 -->
+{% endblock %}
