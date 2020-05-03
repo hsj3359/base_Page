@@ -7,10 +7,10 @@ def index(request):
         username = ""
         return render(request, 'main/main.html', {'username':username})
     else:
-        username = request.user.username
+        user = request.user
         join = Join.objects.filter(user=request.user)
         dict = {
-            'username':username,
+            'user':user,
             'join':join
         }
     return  render(request, 'main/main.html', dict)

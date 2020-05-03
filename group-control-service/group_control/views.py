@@ -14,6 +14,7 @@ def showGroup(request, pk):
     currGroup = Group.objects.get(id=pk)
     currJoin = Join.objects.get(group=currGroup, user=request.user)
     schedules = Schedule.objects.filter(group=currGroup)
+    user = request.user
 
     notices = Notice.objects.filter(group=currGroup)
     quests = Quest.objects.filter(join=currJoin)
@@ -30,6 +31,7 @@ def showGroup(request, pk):
         'quest': quest,
         'questCount': questCount,
         'sche_form': sche_form,
+        'user': user,
     }
     return render(request, "group_control/index.html", dict)
 
@@ -93,6 +95,13 @@ def createNotice(request, pk):
             Notice.objects.create(title=newNot.title, type=newNot.type, content=newNot.content, group=currGroup)
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def showChat(request, pk):
+    currGroup = Group.objects.get(id=pk)
+    dict = {
+        'group': currGroup,
+    }
+    return render(request, 'group_control/chat.html', dict)
 
 def shareReward(request):
     # 상금 분배하는 기능
