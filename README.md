@@ -18,7 +18,7 @@
 
 - ##### 상단 부분과 왼쪽 부분과 맨 아랫 부분 코드
 
-![프론트1](C:\Users\kom27\Desktop\캡스톨 발표\프론트1.jpg)
+
 
 - `group-control-service` - `config` - `templates` - `main_base.html` 에서 코드 관리
 
@@ -26,7 +26,7 @@
 
 - ##### 왼쪽 구역에서 그룹에 관한 부분에 대한 코드
 
-![프론트2](C:\Users\kom27\Desktop\캡스톨 발표\프론트2.jpg)
+
 
 - `group-control-service` - `config` - `templates` - `group_base.html` 에서 코드 관리
 
@@ -34,7 +34,7 @@
 
 - ##### 콘텐츠 부분 코드
 
-![프론트3](C:\Users\kom27\Desktop\캡스톨 발표\프론트3.jpg)
+
 
 - 메인 화면
   - `group-control-service` - `main` - `templates` - `main`- `main.html` 에서 코드 관리
