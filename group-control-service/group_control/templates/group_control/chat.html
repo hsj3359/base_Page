@@ -1,4 +1,5 @@
 {% extends 'group_control/base.html' %}
+{% load static %}
 
 {% block head %}
 <!-- head 영역 -->
@@ -13,7 +14,7 @@
 
 {% block content %}
 <!-- content 영역 -->
-<div class="container-fluid" style="background-image: url('BG_img.jpg');">
+<div class="container-fluid" style="background-image: url({% static 'BG_img.jpg' %});">
 
   <!-- Page Heading -->
   

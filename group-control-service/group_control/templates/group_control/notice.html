@@ -40,7 +40,7 @@
                    {% for n in notice %}
                     <tr id ="quest1" onclick="viewModal('{{n.title}}')" style="cursor: pointer;">
                       <td>{{n.title}}</td>
-                      <td>{{n.group.host}}</td>
+                      <td>{{n.studyGroup.host}}</td>
                       <td>{{n.created_at | date:'Y-m-d'}}</td>
                     </tr>
                    {% endfor %}
