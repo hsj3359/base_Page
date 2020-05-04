@@ -3,8 +3,8 @@ from .models import Group, Join
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ['title', 'finalTarget', 'groupType', 'fee', 'host', 'created_at']
+    list_display = ['title', 'groupType', 'start', 'end']
 
 @admin.register(Join)
 class JoinAdmin(admin.ModelAdmin):
-    list_display = ['user', 'group', 'role', 'level']
+    list_display = ['user', 'group']

@@ -99,10 +99,15 @@ def createNotice(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def showChat(request, pk):
-    currGroup = Group.objects.get(id=pk)
+    group = Group.objects.get(id=pk)        # 그룹 데이터
+    join = Join.objects.filter(group=group)    # 그룹에 참여한 유저 데이터
     dict = {
-        'group': currGroup,
+        'group': group,
+        'join': join,
     }
     return render(request, 'group_control/chat.html', dict)
+
+def createChat(request, pk):
+    return
 
 

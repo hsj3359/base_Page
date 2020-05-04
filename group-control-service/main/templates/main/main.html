@@ -5,11 +5,230 @@
 {% endblock %}
 
 {% block content %}
-<h1> 현재 사용자는 {{user.username}} 입니다.</h1>
-{% for j in join %}
-<li>
-    <a href="/group/{{j.group.pk}}/">{{j.group.title}}</a>
-</li>
 
-{% endfor %}
+<div>
+  <!-- /.container-fluid -->
+  <!-- 테에에엥ㅇㅇ잉블 시작 -->
+  <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">{{user.username}}님의 참가 현황</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">현재 참여한 스터디 그룹</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+              <th>그룹명</th>
+              <th>일정 분류(스터티/프로젝트 등)</th>
+              <th>참여인원</th>
+              <th>운영 기간</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for j in join%}
+            <tr><!--이부분은 DB에서 가져와야됨-->
+              <td onClick = "location.href='/group/{{j.group.pk}}/'"><!--이부분은 지금은 모두 index로-->{{j.group.title}}</td>
+              <td>{{j.group.groupType}}</td>
+              <td>{{j.group.count}}</td>
+              <td>{{j.group.start | date:'Y-m-d'}} ~ {{j.group.end | date:'Y-m-d'}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <button class="btn btn-secondary btn-icon-split" data-target="#access" data-toggle="modal">
+            <span class="icon text-white-50">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">스터디 그룹 참여!</span>
+          </button>
+
+          <!-- 모다아아아아아아ㅏ아ㅏ아아아아ㅏ라라 버튼부분 -->
+          <div class="modal fade" id="access" >
+            <div class="modal-dialog">
+              <form method="post" action="{% url 'main:joinGroup' %}">
+                {% csrf_token %}
+                <div class="modal-content">
+                  <!-- header -->
+                  <div class="modal-header">
+                    <!-- header title -->
+                    <h4 class="modal-title">-그룹 참여-</h4>
+                    <!-- 닫기(x) 버튼 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+
+                  </div>
+                  <!-- body -->
+                  <div class="modal-body">
+                    <h6>코드를 입력하세요</h6>
+                    <div class="form-group">
+                      <input name="{{ joinForm.code.html_name }}" type="text" class="form-control form-control-user" id="room_num" placeholder="Room number...">
+                    </div>
+                  </div>
+                  <!-- Footer -->
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary btn-user btn-block" value="입즈아아앙!">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+
+          <button class="btn btn-primary btn-icon-split"  data-target="#create" data-toggle="modal">
+            <span class="icon text-white-50">
+              <i class="fas fa-flag"></i>
+            </span>
+            <span class="text">스터디 그룹 생성!</span>
+          </button>
+
+
+          <div class="modal fade" id="create" >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form method="post" action="{% url 'main:createGroup' %}">
+                  {% csrf_token %}
+                  <!-- header -->
+                  <div class="modal-header">
+                    <!-- header title -->
+                    <h4 class="modal-title">새로운 그룹 생성</h4>
+                    <!-- 닫기(x) 버튼 -->
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                  </div>
+                  <!-- body -->
+                  <div class="modal-body">
+                    <H6>그룹명을 지어주세요!</H6>
+                    <div class="form-group">
+                      <input name="{{ groupForm.title.html_name }}" type="text" class="form-control form-control-user" id="room_name" placeholder="ex)캡스톤항 진수호">
+                    </div>
+
+                    <H6>어떤 유형이죠?</H6>
+                    <div class="form-group">
+                      <input name="{{ groupForm.groupType.html_name }}" type="text" class="form-control form-control-user" id="room_type" placeholder="ex)토익스터디 / 일본어공부 등">
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">시작 날짜</span>
+                      </div>
+                      <input name="{{ groupForm.start.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">마지막 날짜</span>
+                      </div>
+                      <input name="{{ groupForm.end.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+
+
+                  </div>
+
+                  <!-- Footer -->
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary btn-user btn-block" value="생서어엉!">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          </br></br></br>
+
+          <!-- 임박한 과제 -->
+          <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+              <!-- 상자 헤더 -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">일정 마감 임박!!!!!</h6>
+              </div>
+              <!-- 본문 -->
+              <div class="card-body">
+                <span class="mr-2">
+                  <i class="fas fa-circle text-primary">이부분은</i>
+                </span>
+                </br>
+                <h7>2020년 6월 1일까지 </h7>
+                </br>
+                <h8 id="sample02"></h8>
+                </br>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-success">뭐 어떻게</i>
+                </span>
+                </br>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-info">만들어야한담</i>
+                </span>
+                </br>
+                <!-- 상자 아래부분 -->
+                <div class="mt-4 text-center small">
+                  <span class="mr-2">
+                    <i class="fas fa-circle text-primary"></i> 고정일정
+                  </span>
+                  <span class="mr-2">
+                    <i class="fas fa-circle text-success"></i> 비정기일정
+                  </span>
+                  <span class="mr-2">
+                    <i class="fas fa-circle text-info"></i> 기타
+                  </span>
+                </div>
+
+                <script>
+                      const countDownTimer = function (id, date) { 
+                        var _vDate = new Date(date); // 전달 받은 일자 
+                        var _second = 1000; 
+                        var _minute = _second * 60; 
+                        var _hour = _minute * 60; 
+                        var _day = _hour * 24; 
+                        var timer; 
+
+                        function showRemaining() { 
+                          var now = new Date(); 
+                          var distDt = _vDate - now; 
+                          if (distDt < 0) { 
+                            clearInterval(timer); 
+                            document.getElementById(id).textContent = '종료 되었습니다!'; 
+                            return; 
+                            }
+                            
+                            var days = Math.floor(distDt / _day); 
+                            var hours = Math.floor((distDt % _day) / _hour); 
+                            var minutes = Math.floor((distDt % _hour) / _minute); 
+                            var seconds = Math.floor((distDt % _minute) / _second); 
+                            
+                            //document.getElementById(id).textContent = date.toLocaleString() + "까지 : "; 
+                            document.getElementById(id).textContent = days + '일 '; 
+                            document.getElementById(id).textContent += hours + '시간 '; 
+                            document.getElementById(id).textContent += minutes + '분 '; 
+                            document.getElementById(id).textContent += seconds + '초'; 
+                          } 
+                            
+                          timer = setInterval(showRemaining, 1000); 
+                        } 
+                            
+                        var dateObj = new Date(); 
+                        dateObj.setDate(dateObj.getDate() + 1); 
+                        
+                        countDownTimer('sample02', '06/01/2020 00:00 AM');
+                      </script>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+</div>
+
 {% endblock %}
