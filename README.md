@@ -4,6 +4,8 @@
     - `Pycharm`으로 프로젝트 실행 후, 터미널에 다음 코드 순서대로 입력
     
     - ```
+       pip install django
+       pip install django-allauth
       .\myvenv\Scripts\activate.bat
       python manage.py runserver
       ```
