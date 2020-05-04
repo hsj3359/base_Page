@@ -1,17 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1> 현재 사용자는 {{username}} 입니다.</h1>
-<a href="../../logout">로그아웃</a><br>
+{% extends 'main/base.html' %}
+
+{% block head %}
+<title>Main</title>
+{% endblock %}
+
+{% block content %}
+<h1> 현재 사용자는 {{user.username}} 입니다.</h1>
 {% for j in join %}
-{{j.group.title}}
+<li>
+    <a href="/group/{{j.group.pk}}/">{{j.group.title}}</a>
+</li>
+
 {% endfor %}
-</body>
-</html>
+{% endblock %}
