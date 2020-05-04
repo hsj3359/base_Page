@@ -20,7 +20,7 @@
 
 ![프론트1](C:\Users\kom27\Desktop\캡스톨 발표\프론트1.jpg)
 
-- `group-control-service` - `config` - `templates` - `main_base.html` 에서 코드 관리
+- `group-control-service` - `config` - `templates` - `base.html` 에서 코드 관리
 
 
 
@@ -28,7 +28,7 @@
 
 ![프론트2](C:\Users\kom27\Desktop\캡스톨 발표\프론트2.jpg)
 
-- `group-control-service` - `config` - `templates` - `group_base.html` 에서 코드 관리
+- `group-control-service` - `group-control` - `templates` - `group-control` - `base.html` 에서 코드 관리
 
 
 

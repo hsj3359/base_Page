@@ -1,1 +1,38 @@
-{% extends 'group_base.html' %}
+{% extends 'base.html' %}
+
+{% block nav %}
+      <div class="sidebar-heading">
+        {{group.title}} 스터디 그룹
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="/group/{{group.pk}}/">
+          <span>HOME</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/group/{{group.pk}}/chat">
+          <i class="fas fa-comments"></i>
+          <span>대화방</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/group/{{group.pk}}/notice">
+          ※ <span>공지사항</span></a>
+      </li>
+
+        <div class="text-center d-none d-md-inline mt-3">
+        <button class="rounded-circle border-0" id="start" onclick="change()">start</button>
+        <script>
+          function change(){
+            //여기에 if문 넣어서 구분하면될것 같아요
+            document.getElementById('start').innerHTML = "end";
+          }
+        </script>
+        </div>
+ <br>
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+{% endblock %}

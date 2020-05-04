@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from main.models import *
 from .models import *
 from .forms import *
+from django.utils.safestring import mark_safe
+import json
 
 def showGroup(request, pk):
     # 그룹에 관한 데이터를 보여주는 기능
@@ -102,61 +104,5 @@ def showChat(request, pk):
         'group': currGroup,
     }
     return render(request, 'group_control/chat.html', dict)
-
-def shareReward(request):
-    # 상금 분배하는 기능
-    return
-
-def modify(request):
-    # 그룹 데이터 수정 기능
-    # 호스트 기능
-    return
-
-def invite(request):
-    # 초대 기능
-    # 호스트 기능
-    return
-
-def retire(request):
-    # 강제 퇴장 기능
-    # 호스트 기능
-    return
-
-
-
-
-
-
-def approveSub(request):
-    # 과제 승인 기능
-    # 호스트 기능
-    return
-
-def approveFinal(request):
-    # 최종 목표 승인 기능
-    # 이 기능 후 상금 분배
-    # 호스트 기능
-    return
-
-def unjoin(request):
-    # 탈퇴 기능
-    # 멤버 기능
-    return
-
-def checkSche(request):
-    # 일정 체크 기능
-    # 멤버 기능
-    return
-
-def submitSub(request):
-    # 과제 제출 기능
-    # 멤버 기능
-    return
-
-def checkFinal(request):
-    # 최종 목표 달성 기능
-    # 멤버 기능
-    return
-
 
 
