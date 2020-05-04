@@ -12,7 +12,7 @@
 
 ## Front html문서 배치
 
-- 전체적으로 중복되는 코드는 한 곳으로 따로 저장하였음
+- 전체적으로 중복되는 코드는 한 곳으로 따로 저장하였음 
 
   
 
@@ -20,7 +20,7 @@
 
 ![프론트1](https://user-images.githubusercontent.com/48911171/80911474-95aa2c80-8d71-11ea-8d61-ec0a6014fff9.jpg)
 
-- `group-control-service` - `config` - `templates` - `main_base.html` 에서 코드 관리
+- `group-control-service` - `config` - `templates` - `base.html` 에서 코드 관리
 
 
 
@@ -28,7 +28,7 @@
 
 ![프론트2](https://user-images.githubusercontent.com/48911171/80911481-a0fd5800-8d71-11ea-87ad-19cfa9dd29a1.jpg)
 
-- `group-control-service` - `config` - `templates` - `group_base.html` 에서 코드 관리
+- `group-control-service` - `group-control` - `templates` - `group-control` - `base.html` 에서 코드 관리
 
 
 
