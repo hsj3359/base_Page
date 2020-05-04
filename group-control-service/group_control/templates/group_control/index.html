@@ -102,23 +102,6 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">경험치</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">EXP {{join.exp}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
@@ -149,7 +132,7 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">퀘스트</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">과제</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{questCount}}</div>
                     </div>
                     <div class="col-auto">
@@ -236,7 +219,7 @@
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">퀘스트 목록</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">과제</h6>
                 </div>
                 <div class="card-body">
                   <ul class="list-group" id="cautionList">
@@ -259,26 +242,30 @@
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">순위</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">공부량</h6>
                 </div>
                 <div class="card-body">
-
-                  <h4 class="small font-weight-bold">진수 <span class="float-right">Complete!</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-success " role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-
-                  <h4 class="small font-weight-bold">세환 <span class="float-right">40%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-
-                  <h4 class="small font-weight-bold">성준 <span class="float-right">20%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-
-
+                  
+                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+                  <script src="https://d3js.org/d3.v3.min.js"></script>     
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+                  <div id="linechart"></div>
+                  <script>
+                    var chart = c3.generate({
+                      bindto: "#linechart",
+                      data: {
+                        json :{
+                          date:['05.01','05.02','05.03','05.04'],
+                          sungjun:[1,2,3,4],
+                          sh:[5,4,3,2],
+                          jinsu:[1,2,5,3]
+                        },
+                        x :'date'
+                         
+                      }
+                      
+                    });
+                  </script>
                 </div>
               </div>
 

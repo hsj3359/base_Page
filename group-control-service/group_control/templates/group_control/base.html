@@ -11,24 +11,44 @@
         <a class="nav-link" href="/group/{{group.pk}}/">
           <span>HOME</span></a>
       </li>
-
+      <hr class="sidebar-divider d-none d-md-block">
+      <li class="nav-item">
+        <a class="nav-link" href="/group/{{group.pk}}/notice">
+          ※ <span>공지사항</span></a>
+      </li>
+      <hr class="sidebar-divider d-none d-md-block">
       <li class="nav-item">
         <a class="nav-link" href="/group/{{group.pk}}/chat">
           <i class="fas fa-comments"></i>
           <span>대화방</span></a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link" href="/group/{{group.pk}}/notice">
-          ※ <span>공지사항</span></a>
+        <a class="nav-link" href="/group/{{group.pk}}/quest">
+          <i class="fas fa-fw fa-table"></i>
+          <span>과제</span></a>
       </li>
+     <li class="nav-item">
+        <a class="nav-link" href="/group/{{group.pk}}/book">
+          <i class="fas fa-book"></i>
+          <span>학습노트</span></a>
+      </li>
+      
 
         <div class="text-center d-none d-md-inline mt-3">
         <button class="rounded-circle border-0" id="start" onclick="change()">start</button>
         <script>
+          var start = true;
           function change(){
             //여기에 if문 넣어서 구분하면될것 같아요
-            document.getElementById('start').innerHTML = "end";
+            if(start){
+              document.getElementById('start').innerHTML = "end";
+              start = false;
+            }
+            else{
+              document.getElementById('start').innerHTML = "start";
+              start = true;
+            }
+            
           }
         </script>
         </div>
