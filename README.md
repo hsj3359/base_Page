@@ -18,7 +18,7 @@
 
 - ##### 상단 부분과 왼쪽 부분과 맨 아랫 부분 코드
 
-![프론트1](C:\Users\kom27\Desktop\캡스톨 발표\프론트1.jpg)
+![프론트1](https://user-images.githubusercontent.com/48911171/80911474-95aa2c80-8d71-11ea-8d61-ec0a6014fff9.jpg)
 
 - `group-control-service` - `config` - `templates` - `base.html` 에서 코드 관리
 
@@ -26,7 +26,7 @@
 
 - ##### 왼쪽 구역에서 그룹에 관한 부분에 대한 코드
 
-![프론트2](C:\Users\kom27\Desktop\캡스톨 발표\프론트2.jpg)
+![프론트2](https://user-images.githubusercontent.com/48911171/80911481-a0fd5800-8d71-11ea-87ad-19cfa9dd29a1.jpg)
 
 - `group-control-service` - `group-control` - `templates` - `group-control` - `base.html` 에서 코드 관리
 
@@ -34,7 +34,7 @@
 
 - ##### 콘텐츠 부분 코드
 
-![프론트3](C:\Users\kom27\Desktop\캡스톨 발표\프론트3.jpg)
+![프론트3](https://user-images.githubusercontent.com/48911171/80911490-a35fb200-8d71-11ea-94f4-5466460311dd.jpg)
 
 - 메인 화면
   - `group-control-service` - `main` - `templates` - `main`- `main.html` 에서 코드 관리
