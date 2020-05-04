@@ -143,9 +143,7 @@
       <hr class="sidebar-divider">
 
       <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
+   
 
       <!-- Nav Item - Pages Collapse Menu -->
      
@@ -153,25 +151,33 @@
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="notice.html">
-          ※ <span>공지사항</span></a>
+          <i class="fas fa-exclamation-circle"></i>
+          <span>공지사항</span></a>
       </li>
 
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
+     
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+       <!-- Nav Item - Tables -->
+       <li class="nav-item">
         <a class="nav-link" href="quest.html">
           <i class="fas fa-fw fa-table"></i>
           <span>퀘스트</span></a>
       </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
       <li class="nav-item">
         <a class="nav-link" href="chat.html">
           <i class="fas fa-comments"></i>
           <span>대화방</span></a>
       </li>
-    
+      <li class="nav-item">
+        <a class="nav-link" href="chat.html">
+          <i class="fas fa-book"></i>
+          <span>학습노트</span></a>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
        
@@ -183,7 +189,13 @@
       </div>
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline mt-3">
-        <button class="rounded-circle border-0" id="start">start</button>
+        <button class="rounded-circle border-0" id="start" onclick="change()">start</button>
+        <script>
+          function change(){
+            //여기에 if문 넣어서 구분하면될것 같아요
+            document.getElementById('start').innerHTML = "end";
+          }
+        </script>
       </div>
 
     </ul>
