@@ -1,17 +1,5 @@
 from django.db import models
-from main.models import Group, Join
-
-class Quest(models.Model):
-    title = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
-    exp = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    end = models.DateTimeField()
-    join = models.ForeignKey(Join, on_delete=models.CASCADE, default=0)
-    content = models.CharField(max_length=200, null=True)
-
-    class Meta:
-        ordering = ['created_at']
+from main.models import StudyGroup
 
 class Schedule(models.Model):
     title = models.CharField(max_length=50)
@@ -19,7 +7,7 @@ class Schedule(models.Model):
     time = models.TimeField(null=True)
     content = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, default=0)
+    studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
 
     class Meta:
         ordering = ['created_at']
@@ -27,7 +15,7 @@ class Schedule(models.Model):
 class Notice(models.Model):
     title = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, default=0)
+    studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
     type = models.CharField(max_length=50, null=True)
     content = models.CharField(max_length=200, null=True)
 

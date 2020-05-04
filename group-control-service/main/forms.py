@@ -4,16 +4,16 @@ from .models import *
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class GroupForm(forms.ModelForm):
+class CreateGroupForm(forms.ModelForm):
     class Meta:
-        model = Group
+        model = StudyGroup
         fields = {'title', 'groupType', 'start', 'end'}
         widgets = {
             'start': DateInput(),
             'end': DateInput(),
         }
 
-class JoinForm(forms.ModelForm):
+class JoinGroupForm(forms.ModelForm):
     class Meta:
-        model = Group
+        model = StudyGroup
         fields = {'code'}

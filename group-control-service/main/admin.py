@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Group, Join
+from .models import *
 
-@admin.register(Group)
+@admin.register(StudyGroup)
 class GroupAdmin(admin.ModelAdmin):
     list_display = ['title', 'groupType', 'start', 'end']
 
 @admin.register(Join)
 class JoinAdmin(admin.ModelAdmin):
-    list_display = ['user', 'group']
+    list_display = ['user', 'studyGroup']

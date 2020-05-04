@@ -25,18 +25,16 @@
             <thead>
             <tr>
               <th>그룹명</th>
-              <th>일정 분류(스터티/프로젝트 등)</th>
-              <th>참여인원</th>
+              <th>그룹 유형</th>
               <th>운영 기간</th>
             </tr>
             </thead>
             <tbody>
             {% for j in join%}
             <tr><!--이부분은 DB에서 가져와야됨-->
-              <td onClick = "location.href='/group/{{j.group.pk}}/'"><!--이부분은 지금은 모두 index로-->{{j.group.title}}</td>
-              <td>{{j.group.groupType}}</td>
-              <td>{{j.group.count}}</td>
-              <td>{{j.group.start | date:'Y-m-d'}} ~ {{j.group.end | date:'Y-m-d'}}</td>
+              <td onClick = "location.href='/group/{{j.studyGroup.pk}}/'"><!--이부분은 지금은 모두 index로-->{{j.studyGroup.title}}</td>
+              <td>{{j.studyGroup.groupType}}</td>
+              <td>{{j.studyGroup.start | date:'Y-m-d'}} ~ {{j.studyGroup.end | date:'Y-m-d'}}</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -67,7 +65,7 @@
                   <div class="modal-body">
                     <h6>코드를 입력하세요</h6>
                     <div class="form-group">
-                      <input name="{{ joinForm.code.html_name }}" type="text" class="form-control form-control-user" id="room_num" placeholder="Room number...">
+                      <input name="{{ joinGroupForm.code.html_name }}" type="text" class="form-control form-control-user" id="room_num" placeholder="Room number...">
                     </div>
                   </div>
                   <!-- Footer -->
@@ -105,26 +103,26 @@
                   <div class="modal-body">
                     <H6>그룹명을 지어주세요!</H6>
                     <div class="form-group">
-                      <input name="{{ groupForm.title.html_name }}" type="text" class="form-control form-control-user" id="room_name" placeholder="ex)캡스톤항 진수호">
+                      <input name="{{ createGroupForm.title.html_name }}" type="text" class="form-control form-control-user" id="room_name" placeholder="ex)캡스톤항 진수호">
                     </div>
 
                     <H6>어떤 유형이죠?</H6>
                     <div class="form-group">
-                      <input name="{{ groupForm.groupType.html_name }}" type="text" class="form-control form-control-user" id="room_type" placeholder="ex)토익스터디 / 일본어공부 등">
+                      <input name="{{ createGroupForm.groupType.html_name }}" type="text" class="form-control form-control-user" id="room_type" placeholder="ex)토익스터디 / 일본어공부 등">
                     </div>
 
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">시작 날짜</span>
                       </div>
-                      <input name="{{ groupForm.start.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                      <input name="{{ createGroupForm.start.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">마지막 날짜</span>
                       </div>
-                      <input name="{{ groupForm.end.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                      <input name="{{ createGroupForm.end.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
 
 
