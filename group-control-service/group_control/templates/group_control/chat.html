@@ -3,8 +3,8 @@
 
 {% block head %}
 <!-- head 영역 -->
-  <title>Chat</title>
-  <style>
+<title>Chat</title>
+<style>
     #chat::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
@@ -16,93 +16,146 @@
 <!-- content 영역 -->
 <div class="container-fluid">
 
-  <!-- Page Heading -->
-  <script>
+    <!-- Page Heading -->
+    <script>
     document.getElementById('content-wrapper').setAttribute('style',"background-image: url({% static 'BG_img.jpg' %});")
   </script>
-  <div id="chat" style="height: 700px; overflow-y: scroll;" >
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">진수</h5>
-          <p class="card-text">다들 대가리 박아</p>
-         </div>
-       </div>
-    </div>
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">성준</h5>
-          <p class="card-text">왜요?</p>
-         </div>
-       </div>
-    </div>
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">진수</h5>
-          <p class="card-text">그냥 대가리 박아</p>
-         </div>
-       </div>
-    </div>
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">성준</h5>
-          <p class="card-text">왜요?</p>
-         </div>
-       </div>
-    </div>
-    <div class="col-4 mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">진수</h5>
-          <p class="card-text">박아주라</p>
-         </div>
-       </div>
-    </div>
+    <div id="chat" style="height: 700px; overflow-y: scroll;" >
 
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">성준</h5>
-          <p class="card-text">왜요?</p>
-         </div>
-       </div>
-    </div>
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">세환</h5>
-          <p class="card-text">왜요?</p>
-         </div>
-       </div>
-    </div>
-    <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">세환</h5>
-          <p class="card-text">왜요?</p>
-         </div>
-       </div>
-    </div>  <div class="col-4  mt-3 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">세환</h5>
-          <p class="card-text">왜요?</p>
-         </div>
-       </div>
-    </div>
+        <div class="col-4  mt-3 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">jinsu</h5>
+                    <p class="card-text">여기는 대화방입니다.</p>
+                </div>
+            </div>
+        </div>
 
- </div>
- <div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text">내용</span>
-  </div>
-  <textarea class="form-control" aria-label="With textarea"></textarea>
-  <button>전송</button>
+        <div class="col-4  mt-3 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">jinsu</h5>
+                    <p class="card-text">공부 내역이 올라오며</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4  mt-3 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">jinsu</h5>
+                    <p class="card-text">질문도 할 수 있지요.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4  mt-3 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">System</h5>
+                    <p class="card-text">
+                        jinsu님이 일일 공부를 완료하였습니다.<br>
+                        공부 시간 : 2시간 15분
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4  mt-3 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Jinsu</h5>
+                    <p class="card-text">
+                        관계대명사<br>
+                        관계대명사가 무엇이죠?<br>
+                        <button type="button" id="QButton" class="btn btn-success container" data-toggle="modal" data-target="#solutionModal"> 답변 </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4  mt-3 mb-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Jinsu</h5>
+                    <p class="card-text">
+                        관계대명사란, 접속사의 역할을 하는 대명사입니다.<br>
+                        <button type="button" id="QButton" class="btn btn-success container" data-toggle="modal" data-target="#selectionModal"> 채택 </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">내용</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+        <button>전송</button>
+    </div>
 </div>
+
+<div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">질문 올리기</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">제목</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+
+
+
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">내용</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
+                <div id="submitGrup">
+                    <input type="file" name="profile">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+                <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+      <div class="modal fade"  id="solutionModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">답변</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">내용</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+              </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+              <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
 
 <!-- /content 영역 -->
 {% endblock %}

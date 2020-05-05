@@ -13,6 +13,7 @@ def index(request):
         join = Join.objects.filter(user=request.user)
         createGroupForm = CreateGroupForm()
         joinGroupForm = JoinGroupForm()
+        print(user)
         dict = {
             'user':user,
             'join':join,

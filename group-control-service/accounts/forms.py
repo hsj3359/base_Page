@@ -6,6 +6,6 @@ from django.contrib.auth.models import User
 class ReigsterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'password']
+        fields = ['username', 'password']
 
 
