@@ -1,0 +1,23 @@
+var input_chat = document.querySelector(".input-chat");
+input_chat.addEventListener('click', function(){
+    var chat_space = document.querySelector(".chat-space");
+    var div = document.createElement('div');
+    div.classList.add('col-4', 'mt-3', 'mb-1');
+    var txt = document.querySelector(".txt");
+    var card = document.createElement('div');
+    card.classList.add('card');
+    div.appendChild(card);
+    var card_body = document.createElement('div');
+    card_body.classList.add('card-body');
+    card.appendChild(card_body);
+    var h5 = document.createElement('h5');
+    h5.classList.add('card-title');
+    h5.innerHTML = "진수";
+    card_body.appendChild(h5);
+    var p = document.createElement('p');
+    p.classList.add('card-text');
+    p.innerHTML = txt.value;
+    card_body.appendChild(p);
+    console.log(div);
+    chat_space.appendChild(div);
+    });

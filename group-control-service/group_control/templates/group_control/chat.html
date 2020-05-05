@@ -13,10 +13,10 @@
 
 {% block content %}
 <!-- content 영역 -->
-<div class="container-fluid" style="background-image: url('{% static 'BG_img.jpg' %}');">
+<div class="container-fluid" style="background-image: url({% static 'BG_img.jpg' %});">
 
   <!-- Page Heading -->
-  
+
   <div id="chat" style="height: 700px; overflow-y: scroll;" >
     <a href="https://hangouts.google.com/?hl=ko" target="blank"><i class="fas fa-phone fa-2x mt-3" style="float: right; cursor: pointer; color: white;"alt="통화하기"></i></a>
     <i data-toggle="modal" data-target="#creatModal" class="fas fa-upload fa-2x mr-3 mt-3" style="float: right; cursor:pointer; color: white;"alt="질문올리기"></i>
@@ -116,10 +116,10 @@
           </div>
           <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
         </div>
-       
 
-       
-      
+
+
+
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">내용</span>
@@ -130,7 +130,7 @@
           <input type="file" name="profile">
         </div>
       </div>
-      
+
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
         <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>

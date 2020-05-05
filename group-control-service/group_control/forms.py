@@ -18,15 +18,6 @@ class ScheduleForm(forms.ModelForm):
             'time': TimeInput()
         }
 
-class QuestForm(forms.ModelForm):
-
-    class Meta:
-        model = Quest
-        fields = {'title', 'type', 'exp', 'end', 'content'}
-        widgets = {
-            'end': DateInput(),
-        }
-
 class NoticeForm(forms.ModelForm):
 
     class Meta:
