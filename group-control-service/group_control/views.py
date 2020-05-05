@@ -77,5 +77,17 @@ def showBook(request, pk):
     }
     return render(request, 'group_control/book.html', dict)
 
+def showBookMain(request, pk):
+    dict = {
+
+    }
+    return render(request, 'group_control/book_main.html', dict)
+
+def showCreateBook(request, pk):
+    dict = {
+
+    }
+    return render(request, 'group_control/book_create.html', dict)
+
 
 
