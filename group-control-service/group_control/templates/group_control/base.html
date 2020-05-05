@@ -38,7 +38,7 @@
             start = false;
           }
           else{
-            $('#noticeModal').modal('show');
+            $('#studyModal').modal('show');
             // 모달 안의 취소 버튼에 이벤트를 건다.
            
           }
@@ -59,6 +59,7 @@
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
+
       <div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -73,10 +74,6 @@
                 </div>
                 <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
               </div>
-             
-      
-             
-            
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">내용</span>
@@ -87,7 +84,6 @@
                 <input type="file" name="profile">
               </div>
             </div>
-            
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
               <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
@@ -95,7 +91,8 @@
           </div>
         </div>
       </div>
-      <div class="modal fade"  id="noticeModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+      <div class="modal fade"  id="studyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -103,9 +100,9 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-              <p>공부시작 시간 12:13</p>
-              <p>공부 끝 시간 12:13</p>
-              <p>총 시간 12:13</p>
+              <p>공부 시작 시간 : 14:30</p>
+              <p>공부 끝 시간   : 16:45</p>
+              <p>총 시간 : 2:15</p>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>

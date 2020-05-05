@@ -52,7 +52,7 @@ def createSche(request, pk):
 
 def createNotice(request, pk):
     if request.method == 'POST':
-        print("createQuest!")
+        print("create Notice")
         form = NoticeForm(request.POST)
         if form.is_valid():
             newNot = form.save(commit=False)

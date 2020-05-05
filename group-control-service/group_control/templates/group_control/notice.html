@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<button type="button" data-toggle="modal" data-target="#creatModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3" style="float: right;"><i class="fas fa-download fa-sm text-white-50"></i>글쓰기</button>
+<button type="button" data-toggle="modal" data-target="#noticeModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3" style="float: right;"><i class="fas fa-download fa-sm text-white-50"></i>글쓰기</button>
 <!-- Begin Page Content -->
   <div class="container-fluid">
 
@@ -78,7 +78,7 @@
   </div>
   
 
-  <div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade"  id="noticeModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form method="post" action="{% url 'group:createNotice' group.pk%}">

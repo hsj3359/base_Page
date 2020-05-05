@@ -12,7 +12,7 @@
   <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{user.username}}님의 참가 현황</h1>
+    <h1 class="h3 mb-2 text-gray-800">{{user}}님의 참가 현황</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -56,7 +56,7 @@
                   <!-- header -->
                   <div class="modal-header">
                     <!-- header title -->
-                    <h4 class="modal-title">-그룹 참여-</h4>
+                    <h4 class="modal-title">그룹 참여</h4>
                     <!-- 닫기(x) 버튼 -->
                     <button type="button" class="close" data-dismiss="modal">×</button>
 
@@ -70,7 +70,7 @@
                   </div>
                   <!-- Footer -->
                   <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary btn-user btn-block" value="입즈아아앙!">
+                    <input type="submit" class="btn btn-primary btn-user btn-block" value="입장!">
                   </div>
                 </div>
               </form>
@@ -125,12 +125,16 @@
                       <input name="{{ createGroupForm.end.html_name }}" type="date" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
 
+                    <H6>일일 공부 시간!</H6>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="room_name" >
+                    </div>
 
                   </div>
 
                   <!-- Footer -->
                   <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary btn-user btn-block" value="생서어엉!">
+                    <input type="submit" class="btn btn-primary btn-user btn-block" value="생성!">
                   </div>
                 </form>
               </div>
@@ -140,86 +144,85 @@
           </br></br></br>
 
           <!-- 임박한 과제 -->
-          <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-              <!-- 상자 헤더 -->
-              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">일정 마감 임박!!!!!</h6>
-              </div>
-              <!-- 본문 -->
-              <div class="card-body">
-                <span class="mr-2">
-                  <i class="fas fa-circle text-primary">이부분은</i>
-                </span>
-                </br>
-                <h7>2020년 6월 1일까지 </h7>
-                </br>
-                <h8 id="sample02"></h8>
-                </br>
-                <span class="mr-2">
-                  <i class="fas fa-circle text-success">뭐 어떻게</i>
-                </span>
-                </br>
-                <span class="mr-2">
-                  <i class="fas fa-circle text-info">만들어야한담</i>
-                </span>
-                </br>
-                <!-- 상자 아래부분 -->
-                <div class="mt-4 text-center small">
-                  <span class="mr-2">
-                    <i class="fas fa-circle text-primary"></i> 고정일정
-                  </span>
-                  <span class="mr-2">
-                    <i class="fas fa-circle text-success"></i> 비정기일정
-                  </span>
-                  <span class="mr-2">
-                    <i class="fas fa-circle text-info"></i> 기타
-                  </span>
+          <div style="display:flex;">
+
+            <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <!-- 상자 헤더 -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">캡스톤 개발 7조 일일 공부</h6>
                 </div>
+                <!-- 본문 -->
+                <div class="card-body">
+                <span class="mr-2">
+                  <i class="fas fa-circle text-primary">마감 시간</i>
+                </span>
+                  </br>
+                  <h7>2020년 5월 6일 00시 </h7>
+                  </br>
+                  <h8 id="sample02"></h8>
+                  </br>
+                  <span class="mr-2">
+                  <i class="fas fa-circle text-success">내용</i>
+                </span>
+                  </br>
+                  <h7>캡스톤 개발 7조 일일 공부</h7>
+                  </br>
+                  <!--&lt;!&ndash; 상자 아래부분 &ndash;&gt;-->
+                  <!--<div class="mt-4 text-center small">-->
+                  <!--<span class="mr-2">-->
+                  <!--<i class="fas fa-circle text-primary"></i> 고정일정-->
+                  <!--</span>-->
+                  <!--<span class="mr-2">-->
+                  <!--<i class="fas fa-circle text-success"></i> 비정기일정-->
+                  <!--</span>-->
+                  <!--<span class="mr-2">-->
+                  <!--<i class="fas fa-circle text-info"></i> 기타-->
+                  <!--</span>-->
+                  <!--</div>-->
+                </div>
+              </div>
+            </div>
 
-                <script>
-                      const countDownTimer = function (id, date) { 
-                        var _vDate = new Date(date); // 전달 받은 일자 
-                        var _second = 1000; 
-                        var _minute = _second * 60; 
-                        var _hour = _minute * 60; 
-                        var _day = _hour * 24; 
-                        var timer; 
-
-                        function showRemaining() { 
-                          var now = new Date(); 
-                          var distDt = _vDate - now; 
-                          if (distDt < 0) { 
-                            clearInterval(timer); 
-                            document.getElementById(id).textContent = '종료 되었습니다!'; 
-                            return; 
-                            }
-                            
-                            var days = Math.floor(distDt / _day); 
-                            var hours = Math.floor((distDt % _day) / _hour); 
-                            var minutes = Math.floor((distDt % _hour) / _minute); 
-                            var seconds = Math.floor((distDt % _minute) / _second); 
-                            
-                            //document.getElementById(id).textContent = date.toLocaleString() + "까지 : "; 
-                            document.getElementById(id).textContent = days + '일 '; 
-                            document.getElementById(id).textContent += hours + '시간 '; 
-                            document.getElementById(id).textContent += minutes + '분 '; 
-                            document.getElementById(id).textContent += seconds + '초'; 
-                          } 
-                            
-                          timer = setInterval(showRemaining, 1000); 
-                        } 
-                            
-                        var dateObj = new Date(); 
-                        dateObj.setDate(dateObj.getDate() + 1); 
-                        
-                        countDownTimer('sample02', '06/01/2020 00:00 AM');
-                      </script>
-
+            <!-- 임박한 과제 -->
+            <div class="col-xl-4 col-lg-5">
+              <div class="card shadow mb-4">
+                <!-- 상자 헤더 -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">캡스톤 개발 7조 3차 발표</h6>
+                </div>
+                <!-- 본문 -->
+                <div class="card-body">
+                <span class="mr-2">
+                  <i class="fas fa-circle text-primary">마감 시간</i>
+                </span>
+                  </br>
+                  <h7>2020년 5월 6일 14시 </h7>
+                  </br>
+                  <h8 id="sample03"></h8>
+                  </br>
+                  <span class="mr-2">
+                  <i class="fas fa-circle text-success">내용</i>
+                </span>
+                  </br>
+                  <h7>캡스톤 개발 7조 3차 발표</h7>
+                  </br>
+                  <!--&lt;!&ndash; 상자 아래부분 &ndash;&gt;-->
+                  <!--<div class="mt-4 text-center small">-->
+                  <!--<span class="mr-2">-->
+                  <!--<i class="fas fa-circle text-primary"></i> 고정일정-->
+                  <!--</span>-->
+                  <!--<span class="mr-2">-->
+                  <!--<i class="fas fa-circle text-success"></i> 비정기일정-->
+                  <!--</span>-->
+                  <!--<span class="mr-2">-->
+                  <!--<i class="fas fa-circle text-info"></i> 기타-->
+                  <!--</span>-->
+                  <!--</div>-->
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -228,5 +231,43 @@
   <!-- /.container-fluid -->
 
 </div>
+<script>
+                      const countDownTimer = function (id, date) {
+                        var _vDate = new Date(date); // 전달 받은 일자
+                        var _second = 1000;
+                        var _minute = _second * 60;
+                        var _hour = _minute * 60;
+                        var _day = _hour * 24;
+                        var timer;
 
+                        function showRemaining() {
+                          var now = new Date();
+                          var distDt = _vDate - now;
+                          if (distDt < 0) {
+                            clearInterval(timer);
+                            document.getElementById(id).textContent = '종료 되었습니다!';
+                            return;
+                            }
+
+                            var days = Math.floor(distDt / _day);
+                            var hours = Math.floor((distDt % _day) / _hour);
+                            var minutes = Math.floor((distDt % _hour) / _minute);
+                            var seconds = Math.floor((distDt % _minute) / _second);
+
+                            //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+                            document.getElementById(id).textContent = days + '일 ';
+                            document.getElementById(id).textContent += hours + '시간 ';
+                            document.getElementById(id).textContent += minutes + '분 ';
+                            document.getElementById(id).textContent += seconds + '초';
+                          }
+
+                          timer = setInterval(showRemaining, 1000);
+                        }
+
+                        var dateObj = new Date();
+                        dateObj.setDate(dateObj.getDate() + 1);
+
+                        countDownTimer('sample02', '05/06/2020 00:00 AM');
+                        countDownTimer('sample03', '05/06/2020 02:00 PM');
+                      </script>
 {% endblock %}
