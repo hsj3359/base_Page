@@ -14,13 +14,14 @@
 
 {% block content %}
 <!-- content 영역 -->
-<div class="container-fluid" style="background-image: url({% static 'BG_img.jpg' %});">
+<div class="container-fluid">
 
   <!-- Page Heading -->
-  
+  <script>
+    document.getElementById('content-wrapper').setAttribute('style',"background-image: url({% static 'BG_img.jpg' %});")
+   
+  </script>
   <div id="chat" style="height: 700px; overflow-y: scroll;" >
-    <a href="https://hangouts.google.com/?hl=ko" target="blank"><i class="fas fa-phone fa-2x" style="float: right; cursor: pointer; color: white;"alt="통화하기"></i></a>
-    <i data-toggle="modal" data-target="#creatModal" class="fas fa-upload fa-2x mr-3" style="float: right; cursor:pointer; color: white;"alt="질문올리기"></i>
     <div class="col-4  mt-3 mb-1">
       <div class="card">
         <div class="card-body">
