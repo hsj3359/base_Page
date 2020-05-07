@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from group_control.models import Schedule
 from .models import *
 from .forms import *
 import random
@@ -13,12 +14,15 @@ def index(request):
         join = Join.objects.filter(user=request.user)
         createGroupForm = CreateGroupForm()
         joinGroupForm = JoinGroupForm()
-        print(user)
+        schedule = []
+        for j in join:
+            schedule.append(Schedule.objects.filter(studyGroup=j.studyGroup))
         dict = {
             'user':user,
             'join':join,
             'createGroupForm':createGroupForm,
             'joinGroupForm':joinGroupForm,
+            'schedule':schedule,
         }
     return  render(request, 'main/main.html', dict)
 

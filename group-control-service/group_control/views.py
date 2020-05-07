@@ -46,7 +46,7 @@ def createSche(request, pk):
         if form.is_valid():
             new_sche = form.save(commit=False)
             studyGroup = StudyGroup.objects.get(id=pk)
-            Schedule.objects.create(title=new_sche.title, date=new_sche.date, time=new_sche.time, studyGroup=studyGroup)
+            Schedule.objects.create(title=new_sche.title, date=new_sche.date, time=new_sche.time, content=new_sche.content, studyGroup=studyGroup)
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
