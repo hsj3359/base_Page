@@ -13,12 +13,12 @@ def showGroup(request, pk):
     # 과제 표시
     studyGroup = StudyGroup.objects.get(id=pk)
     join = Join.objects.get(user=request.user, studyGroup=studyGroup)
-    schedules = Schedule.objects.filter(studyGroup=studyGroup)
+    schedule = Schedule.objects.filter(studyGroup=studyGroup)
     user = request.user
-    notices = Notice.objects.filter(studyGroup=studyGroup)
+    notice = Notice.objects.filter(studyGroup=studyGroup)
     scheForm = ScheduleForm()
-    schedule = schedules[0:2]
-    notice = notices[0:2]
+    for n in notice:
+        print(n.title)
     dict = {
         'group':studyGroup,
         'join':join,
@@ -48,6 +48,27 @@ def createSche(request, pk):
             studyGroup = StudyGroup.objects.get(id=pk)
             Schedule.objects.create(title=new_sche.title, date=new_sche.date, time=new_sche.time, content=new_sche.content, studyGroup=studyGroup)
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def modifySche(request, pk, pk2):
+    if request.method == 'POST':
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            change_sche = form.save(commit=False)
+            sche = Schedule.objects.get(id=pk2)
+            sche.title = change_sche.title
+            sche.date = change_sche.date
+            sche.time = change_sche.time
+            sche.content = change_sche.content
+            sche.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def deleteSche(request, pk, pk2):
+    if request.method == 'POST':
+        sche = Schedule.objects.get(id=pk2)
+        sche.delete()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def createNotice(request, pk):

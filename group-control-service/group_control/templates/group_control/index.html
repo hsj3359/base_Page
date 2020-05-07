@@ -34,7 +34,7 @@
         for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
         {
             cell = row.insertCell();
-            cell.setAttribute( 'onclick', 'notify('+i+')');
+            cell.setAttribute( 'onclick', 'clickCal('+i+')');
             cell.setAttribute( 'style', 'cursor: pointer;');
             cell.innerHTML = i;
             cnt = cnt + 1;
@@ -69,10 +69,7 @@
         }
 
     }
-    function notify(num){ //달력의 날을 누르면 아래 일정표에 제목이 바뀌도록 만들었음
-        document.getElementById('calendar_title').innerHTML =(today.getMonth() + 1) + "월"+num+"일"+ "  일정"
-    }
-   
+
 </script>
 <!-- /head 영역 -->
 {% endblock %}
@@ -144,7 +141,7 @@
       </div>
     </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -193,8 +190,9 @@
             </tbody>
           </table>
           <script>
-                    build();
-                  </script>
+            build();
+
+          </script>
         </div>
       </div>
     </div>
@@ -205,22 +203,101 @@
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
-          <h6 id="calendar_title" class="m-0 font-weight-bold text-primary">일정</h6>
+          <h6 id="calendar_title" class="m-0 font-weight-bold text-primary">
+          </h6>
           <button type="button" ><span aria-hidden="true"data-toggle="modal" data-target="#addModal">+</span></button>
         </div>
         <!-- Card Body -->
         <div class="card-body">
           <ul class="list-group">
             {% for sche in schedule %}
-            <li class="list-group-item">
-              <h3>{{sche.date | date:'Y-m-d'}} 
-                <span style="float: right; cursor: pointer; color:red;" data-toggle="modal" data-target="#deleteModal">X</span>
-                <span style="margin-right: 5px; float: right; cursor: pointer;" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-pen"></i></span>
-              </h3> 
-              <ul>
-                <li>{{sche.title}}</li>
-              </ul>
-            </li>
+            <!--<li class="list-group-item">-->
+            <!--<h3>-->
+            <!--<span id="sche_date">{{sche.date | date:'Y-m-d'}}</span>-->
+            <!--<span style="float: right; cursor: pointer; color:red;" data-toggle="modal" data-target="#deleteModal">X</span>-->
+            <!--<span style="margin-right: 5px; float: right; cursor: pointer;" data-toggle="modal" data-target="#modifyModal"><i class="fas fa-pen"></i></span>-->
+
+            <!--</h3>-->
+            <!--<ul>-->
+            <!--<li>{{sche.title}}</li>-->
+            <!--</ul>-->
+            <!--</li>-->
+
+            <!-- deleteModal 영역 -->
+            <div class="modal fade"  id="deleteModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <form method="post" action="{% url 'group:deleteSche' group.pk sche.pk %}">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="deleteModalLabel">일정 삭제</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                      일정을 삭제하시겠습니까?
+                    </div>
+                    <div class="modal-footer">
+                      <!--<button type="submit" class="btn btn-primary" data-dismiss="modal">추가</button>-->
+                      <button type="submit" class="btn btn-primary">삭제</button>
+                      <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- modifyModal 영역 -->
+            <div class="modal fade"  id="modifyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <form method="post" action="{% url 'group:modifySche' group.pk sche.pk %}">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modifyModalLabel">일정 수정</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+
+                    <div class="modal-body">
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">제목</span>
+                        </div>
+                        <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" value="{{sche.title}}" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">날짜</span>
+                        </div>
+                        <input name="{{ sche_form.date.html_name }}" required="required" autofocus="autofocus" type="date" class="form-control" value="{{sche.date}}" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">시간</span>
+                        </div>
+                        <input name="{{ sche_form.time.html_name }}" required="required" autofocus="autofocus" type="time" class="form-control" value="{{sche.time}}" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+
+
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">내용</span>
+                        </div>
+                        <input name="{{ sche_form.content.html_name }}" required="required" autofocus="autofocus" class="form-control" aria-label="With textarea" value="{{sche.content}}">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <!--<button type="submit" class="btn btn-primary" data-dismiss="modal">추가</button>-->
+                      <button type="submit" class="btn btn-primary">추가</button>
+                      <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
             {% endfor %}
 
           </ul>
@@ -312,7 +389,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">제목</span>
             </div>
-            <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" placeholder="일정 제목" aria-label="Username" aria-describedby="basic-addon1">
           </div>
 
           <div class="input-group mb-3">
@@ -346,79 +423,80 @@
     </div>
   </div>
 </div>
-<!-- deletemodal 영역 -->
-<div class="modal fade"  id="deleteModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form method="post" action="{% url 'group:createSche' group.pk%}">
-        {% csrf_token %}
-        <div class="modal-header">
-          <h4 class="modal-title" id="deleteModalLabel">일정 삭제</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        </div>
-        <div class="modal-body">
-          일정을 삭제하시겠습니까?
-        </div>  
-        <div class="modal-footer">
-          <!--<button type="submit" class="btn btn-primary" data-dismiss="modal">추가</button>-->
-          <button type="submit" class="btn btn-primary">삭제</button>
-          <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
-<!-- modifymodal 영역 -->
-<div class="modal fade"  id="modifyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form method="post" action="{% url 'group:createSche' group.pk%}">
-        {% csrf_token %}
-        <div class="modal-header">
-          <h4 class="modal-title" id="modifyModalLabel">일정 수정</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        </div>
+<script>
+  function clickCal(num){
+  // 달력을 누르면 일정 날짜가 바뀌면서 일정 목록도 날짜에 따라 변경하는 함수
+    var month = today.getMonth() + 1; // 현재 달
+    if(month<10) month = '0' + month; // 달이 10보다 작은 경우, 앞에 0을 붙임
+    if(num<10) num = '0' + num;       // 일이 10보다 작은 경우, 앞에 0을 붙임, 앞에 0을 붙이는 이유는 일정 날짜와 비교하기 편해서
 
-        <div class="modal-body">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">제목</span>
-            </div>
-            <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
+    var str = today.getFullYear() + "-" + month + "-"+num+ "  일정" // 클릭한 날짜
+    document.getElementById('calendar_title').innerHTML = str;
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">날짜</span>
-            </div>
-            <input name="{{ sche_form.date.html_name }}" required="required" autofocus="autofocus" type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
+    var sche = new Array();
+    {% for s in schedule %}
+      var sche_dict = {};
+      sche_dict["title"] = "{{s.title}}";
+      sche_dict["date"] = "{{s.date | date:'Y-m-d'}}";
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">시간</span>
-            </div>
-            <input name="{{ sche_form.time.html_name }}" required="required" autofocus="autofocus" type="time" class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
+      sche.push(sche_dict);
+    {% endfor %}
 
 
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">내용</span>
-            </div>
-            <input name="{{ sche_form.content.html_name }}" required="required" autofocus="autofocus" class="form-control" aria-label="With textarea">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <!--<button type="submit" class="btn btn-primary" data-dismiss="modal">추가</button>-->
-          <button type="submit" class="btn btn-primary">추가</button>
-          <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
+    if(document.querySelector(".list-sche")){
+    // 다른 날짜를 클릭할 시 , 이미 표시되던 일정을 다시 숨김
+        document.querySelector(".list-sche").remove();
+    }
+
+    for(var i=0;i<sche.length;i++){
+    if(str.indexOf(sche[i]["date"])==0){
+    // 클릭한 날짜와 일정 날짜가 같은 경우, 그 일정을 표시
+
+    var list_group = document.querySelector(".list-group");
+
+    var list = document.createElement("li");
+    list.classList.add("list-group-item");
+    list.classList.add("list-sche");
+    var h3 = document.createElement("h3");
+    var span = document.createElement("span");
+    span.id = "sche_date";
+    span.innerHTML = sche[i]["date"];
+    h3.appendChild(span);
+    list.appendChild(h3);
+
+    var style = "'float: right; cursor: pointer; color:red;'"
+    var toggle = "'modal'";
+    var target = "'#deleteModal'";
+    var str_delete = "<span style=" + style + " data-toggle=" + toggle +
+      "data-target="+ target +">X</span>";
+    h3.innerHTML += str_delete;
+
+    var style = "'margin-right: 5px; float: right; cursor: pointer;'"
+    var toggle = "'modal'";
+    var target = "'#modifyModal'";
+    var str_modify = "<span style=" + style + " data-toggle=" + toggle +
+      "data-target="+ target +"><i class='fas fa-pen'></i></span>";
+    h3.innerHTML += str_modify;
+
+    var ul = document.createElement("ul");
+    var li = document.createElement("li");
+    li.innerHTML = sche[i]["title"];
+    ul.appendChild(li);
+    list.appendChild(ul);
+
+    list_group.appendChild(list);
+    }
+    }
+  }
+
+  var today = new Date();
+  clickCal(today.getDate());
+
+</script>
+
+
 {% endblock %}
 
 
