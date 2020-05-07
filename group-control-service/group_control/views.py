@@ -52,7 +52,7 @@ def createSche(request, pk):
 
 def createNotice(request, pk):
     if request.method == 'POST':
-        print("createQuest!")
+        print("create Notice")
         form = NoticeForm(request.POST)
         if form.is_valid():
             newNot = form.save(commit=False)
@@ -76,6 +76,18 @@ def showBook(request, pk):
         'group': studyGroup,
     }
     return render(request, 'group_control/book.html', dict)
+
+def showBookMain(request, pk):
+    dict = {
+
+    }
+    return render(request, 'group_control/book_main.html', dict)
+
+def showCreateBook(request, pk):
+    dict = {
+
+    }
+    return render(request, 'group_control/book_create.html', dict)
 
 
 

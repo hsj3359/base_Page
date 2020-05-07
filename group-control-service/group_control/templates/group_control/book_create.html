@@ -1,0 +1,30 @@
+{% extends 'group_control/base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<script>
+  var $box;
+  function select(event){
+    $box = event.target;
+    console.log($box);
+    if($box.id == "title"){
+      
+    }
+  }
+</script>
+<div class="container-fluid">
+
+  <div id="book_main">
+    <div class="container" id="box" onclick="select(event)" style=" background-image:url({% static 'book.jpg' %}); width:564px; height: 864px; padding:30px;">
+      <div class="text-center" onclick="select(event)"> 
+          <h1 id="title">제목</h1>
+      </div>
+      <div id="text"  style="line-height: 1.57em; margin-top: 15px; word-break: break-all;">
+       
+      </div>
+    </div>
+  </div>
+</div>>
+{% endblock %}

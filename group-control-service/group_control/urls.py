@@ -10,4 +10,6 @@ urlpatterns = [
     path('createNotice/', createNotice, name='createNotice'),
     path('chat/', showChat, name='chat'),
     path('book/', showBook, name='book'),
+    path('book_main', showBookMain, name='book_main'),
+    path('book_create', showCreateBook, name='book_create'),
 ]
