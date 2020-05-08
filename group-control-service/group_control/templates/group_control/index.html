@@ -3,74 +3,7 @@
 {% block head %}
 <!-- head 영역 -->
 <title>Group</title>
-<script language="javascript">
-    var today = new Date(); // 오늘 날짜
-    var date = new Date();
 
-    function build()
-    {
-        var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
-        var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
-        var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
-        var yearmonth = document.getElementById("today"); //  년도와 월 출력할곳
-        yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
-        // 남은 테이블 줄 삭제
-        while (tbcal.rows.length > 2)
-        {
-            tbcal.deleteRow(tbcal.rows.length - 1);
-        }
-        var row = null;
-        row = tbcal.insertRow();
-        var cnt = 0;
-
-        // 1일 시작칸 찾기
-        for (i = 0; i < nMonth.getDay(); i++)
-        {
-            cell = row.insertCell();
-            cnt = cnt + 1;
-        }
-
-        // 달력 출력
-        for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
-        {
-            cell = row.insertCell();
-            cell.setAttribute( 'onclick', 'clickCal('+i+')');
-            cell.setAttribute( 'style', 'cursor: pointer;');
-            cell.innerHTML = i;
-            cnt = cnt + 1;
-            if (cnt % 7 == 1) {//일요일 계산
-                cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
-            }
-            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
-                row = calendar.insertRow();// 줄 추가
-            }
-            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate())
-            {
-                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-            }
-        }
-        while(cnt%7!=0){
-            cell = row.insertCell();
-            cell.innerHTML = "";
-            cnt = cnt + 1;
-            if (cnt % 7 == 1) {//일요일 계산
-                cell.innerHTML = "";//일요일에 색
-            }
-            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                cell.innerHTML = "" ;//토요일에 색
-                row = calendar.insertRow();// 줄 추가
-            }
-            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate())
-            {
-                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-            }
-
-        }
-
-    }
-
-</script>
 <!-- /head 영역 -->
 {% endblock %}
 
@@ -142,7 +75,7 @@
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card border-left-danger shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
@@ -189,10 +122,7 @@
 
             </tbody>
           </table>
-          <script>
-            build();
 
-          </script>
         </div>
       </div>
     </div>
@@ -250,7 +180,7 @@
             <div class="modal fade"  id="modifyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <form method="post" action="{% url 'group:modifySche' group.pk sche.pk %}">
+                  <form class = "modify-form" method="post" action="{% url 'group:modifySche' group.pk sche.pk %}">
                     {% csrf_token %}
                     <div class="modal-header">
                       <h4 class="modal-title" id="modifyModalLabel">일정 수정</h4>
@@ -262,7 +192,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">제목</span>
                         </div>
-                        <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" value="{{sche.title}}" aria-label="Username" aria-describedby="basic-addon1">
+                        <input name="{{ sche_form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control sche-title" value="" aria-label="Username" aria-describedby="basic-addon1">
                       </div>
 
                       <div class="input-group mb-3">
@@ -284,7 +214,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">내용</span>
                         </div>
-                        <input name="{{ sche_form.content.html_name }}" required="required" autofocus="autofocus" class="form-control" aria-label="With textarea" value="{{sche.content}}">
+                        <input name="{{ sche_form.content.html_name }}" required="required" autofocus="autofocus" class="form-control sche-body" aria-label="With textarea" value="{{sche.content}}">
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -423,8 +353,34 @@
     </div>
   </div>
 </div>
-
 <script>
+//  일정 수정과 삭제 모달에 관한 코드
+
+  function openModifyModal(title, content, url){
+    var modal_id = document.getElementById("modifyModal");
+    var sche_title = modal_id.querySelector(".sche-title");
+    var sche_body = modal_id.querySelector(".sche-body");
+    var modal_form = modal_id.querySelector(".modify-form");
+
+    sche_title.value = title;
+    sche_body.value = content;
+
+    modal_form.action = url;
+
+    $('#modifyModal').modal('show');
+  }
+
+  function openDeleteModal(url){
+    var modal_id = document.getElementById("deleteModal");
+    var modal_form = modal_id.querySelector(".delete-form");
+
+    modal_form.action = url;
+
+    $('#modifyModal').modal('show');
+  }
+</script>
+<script>
+//일정 출력에 관한 부분
   function clickCal(num){
   // 달력을 누르면 일정 날짜가 바뀌면서 일정 목록도 날짜에 따라 변경하는 함수
     var month = today.getMonth() + 1; // 현재 달
@@ -439,6 +395,8 @@
       var sche_dict = {};
       sche_dict["title"] = "{{s.title}}";
       sche_dict["date"] = "{{s.date | date:'Y-m-d'}}";
+      sche_dict["content"] = "{{s.content}}";
+      sche_dict["url"] = "{% url 'group:modifySche' group.pk s.pk %}";
 
       sche.push(sche_dict);
     {% endfor %}
@@ -447,7 +405,10 @@
 
     if(document.querySelector(".list-sche")){
     // 다른 날짜를 클릭할 시 , 이미 표시되던 일정을 다시 숨김
-        document.querySelector(".list-sche").remove();
+        var curr_sche = document.querySelectorAll(".list-sche");
+        for(var i=0;i<curr_sche.length;i++){
+          curr_sche[i].remove();
+        }
     }
 
     for(var i=0;i<sche.length;i++){
@@ -462,27 +423,35 @@
     var h3 = document.createElement("h3");
     var span = document.createElement("span");
     span.id = "sche_date";
-    span.innerHTML = sche[i]["date"];
+    span.innerHTML = sche[i]["title"];
     h3.appendChild(span);
     list.appendChild(h3);
 
+    var title = sche[i]["title"].replace(/\s/gi,"_");
+    var content = sche[i]["content"].replace(/\s/gi,"_");
+    var url = sche[i]["url"]
+
+    // 삭제 버튼
     var style = "'float: right; cursor: pointer; color:red;'"
     var toggle = "'modal'";
     var target = "'#deleteModal'";
+    var onclick = "openDeleteModal('"+url+"')";
     var str_delete = "<span style=" + style + " data-toggle=" + toggle +
-      "data-target="+ target +">X</span>";
+      "data-target="+ target +" onclick="+ onclick +">X</span>";
     h3.innerHTML += str_delete;
 
+    // 수정 버튼
     var style = "'margin-right: 5px; float: right; cursor: pointer;'"
     var toggle = "'modal'";
     var target = "'#modifyModal'";
+    var onclick = "openModifyModal('"+title+"','"+content+"','"+url+"')";
     var str_modify = "<span style=" + style + " data-toggle=" + toggle +
-      "data-target="+ target +"><i class='fas fa-pen'></i></span>";
+      "data-target="+ target +" onclick="+ onclick +"><i class='fas fa-pen'></i></span>";
     h3.innerHTML += str_modify;
 
     var ul = document.createElement("ul");
     var li = document.createElement("li");
-    li.innerHTML = sche[i]["title"];
+    li.innerHTML = sche[i]["content"];
     ul.appendChild(li);
     list.appendChild(ul);
 
@@ -495,8 +464,95 @@
   clickCal(today.getDate());
 
 </script>
+<script>
+// 달력에 관한 코드
 
+  function build() {
+    var today = new Date(); // 오늘 날짜
+    var date = new Date();
 
+    var sche = new Array();
+    {% for s in schedule %}
+      sche.push(new Date("{{s.date | date:'Y-m-d'}}"));
+    {% endfor %}
+
+    var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
+    var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
+    var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
+    var yearmonth = document.getElementById("today"); //  년도와 월 출력할곳
+    yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
+
+    // 남은 테이블 줄 삭제
+    while (tbcal.rows.length > 2) {
+      tbcal.deleteRow(tbcal.rows.length - 1);
+    }
+
+    var row = null;
+    row = tbcal.insertRow();
+    var cnt = 0;
+
+    // 1일 시작칸 찾기
+    for (i = 0; i < nMonth.getDay(); i++) {
+      cell = row.insertCell();
+      cnt = cnt + 1;
+    }
+
+    // 달력 출력
+    for (i = 1; i <= lastDate.getDate(); i++) { // 1일부터 마지막 일까지
+      cell = row.insertCell();
+      cell.setAttribute( 'onclick', 'clickCal('+i+')');
+      cell.setAttribute( 'style', 'cursor: pointer;');
+      cell.innerHTML = i;
+      cnt = cnt + 1;
+
+      if (cnt % 7 == 1) {//일요일 계산
+        cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
+      }
+
+      if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
+        cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
+        row = calendar.insertRow();// 줄 추가
+      }
+
+      for(var j=0;j<sche.length;j++){
+        if(sche[j].getFullYear()==date.getFullYear()&&sche[j].getMonth()==date.getMonth()&&i==sche[j].getDate()) {
+          cell.bgColor = "#ffffce"; //오늘날짜배경색
+        }
+      }
+
+      if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) {
+        cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+      }
+    }
+
+    while(cnt%7!=0) {
+      cell = row.insertCell();
+      cell.innerHTML = "";
+      cnt = cnt + 1;
+
+      if (cnt % 7 == 1) {//일요일 계산
+        cell.innerHTML = "";//일요일에 색
+      }
+
+      if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
+        cell.innerHTML = "" ;//토요일에 색
+        row = calendar.insertRow();// 줄 추가
+      }
+
+      if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) {
+        cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+      }
+
+      for(var j=0;j<sche.length;j++){
+        if(sche[j].getFullYear()==date.getFullYear()&&sche[j].getMonth()==date.getMonth()&&i==date.getDate()) {
+          cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+        }
+      }
+    }
+  }
+
+  build();
+</script>
 {% endblock %}
 
 
