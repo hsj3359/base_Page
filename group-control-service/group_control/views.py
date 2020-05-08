@@ -110,5 +110,12 @@ def showCreateBook(request, pk):
     }
     return render(request, 'group_control/book_create.html', dict)
 
+def showList(request, pk):
+    studyGroup = StudyGroup.objects.get(id=pk)
+    dict = {
+        'group': studyGroup,
+    }
+    return render(request, 'group_control/list.html', dict)
+
 
 

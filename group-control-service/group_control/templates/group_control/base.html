@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
 
 {% block nav %}
-      
 
-      <!-- Nav Item - Pages Collapse Menu -->
 
-      <li class="nav-item">
-        <a class="nav-link" href="/group/{{group.pk}}/">
-          <i class="fas fa-home"></i>
-          <span>HOME</span></a>
-      </li>
-      <hr class="sidebar-divider d-none d-md-block">
-      <li class="nav-item">
-        <a class="nav-link" href="/group/{{group.pk}}/notice">
-          <i class="fas fa-exclamation"></i>
-          <span>공지사항</span></a>
-      </li>
-      <hr class="sidebar-divider d-none d-md-block">
-      <li class="nav-item">
-        <a class="nav-link" href="/group/{{group.pk}}/chat">
-          <i class="fas fa-comments"></i>
-          <span>대화방</span></a>
-      </li>
+<!-- Nav Item - Pages Collapse Menu -->
 
-     <li class="nav-item">
-        <a class="nav-link" href="/group/{{group.pk}}/book">
-          <i class="fas fa-book"></i>
-          <span>학습노트</span></a>
-      </li>
-      <script>
+<li class="nav-item">
+    <a class="nav-link" href="/group/{{group.pk}}/">
+        <i class="fas fa-home"></i>
+        <span>HOME</span></a>
+</li>
+<hr class="sidebar-divider d-none d-md-block">
+<li class="nav-item">
+    <a class="nav-link" href="/group/{{group.pk}}/notice">
+        <i class="fas fa-exclamation"></i>
+        <span>공지사항</span></a>
+</li>
+<hr class="sidebar-divider d-none d-md-block">
+<li class="nav-item">
+    <a class="nav-link" href="/group/{{group.pk}}/chat">
+        <i class="fas fa-comments"></i>
+        <span>대화방</span></a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/group/{{group.pk}}/book">
+        <i class="fas fa-book"></i>
+        <span>학습노트</span></a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/group/{{group.pk}}/list">
+        <i class="fas fa-book"></i>
+        <span>게시판</span></a>
+</li>
+<script>
         var start = true;
         $('#closeModalBtn').on('click', function(){$('#modalBox').modal('hide');});
         function change(){
@@ -45,70 +51,70 @@
           
         }
       </script>
-      <li class="nav-item">
-        <div id="Timer" class="pd-1"></div>
-        <button type="button" id="StartButton" class="btn btn-warning container" onclick="change()">공부시작</button>
-      </li>
-      <li class="nav-item">
-        <div id="Timer" class="pd-1"></div>
-        <button type="button" id="QButton" class="btn btn-success container" data-toggle="modal" data-target="#creatModal">질문</button>
-      </li>    
-      <br>
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
+<li class="nav-item">
+    <div id="Timer" class="pd-1"></div>
+    <button type="button" id="StartButton" class="btn btn-warning container" onclick="change()">공부시작</button>
+</li>
+<li class="nav-item">
+    <div id="Timer" class="pd-1"></div>
+    <button type="button" id="QButton" class="btn btn-success container" data-toggle="modal" data-target="#creatModal">질문</button>
+</li>
+<br>
+<!-- Divider -->
+<hr class="sidebar-divider d-none d-md-block">
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+</div>
 
-      <div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+<div class="modal fade"  id="creatModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">질문 올리기</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">질문 올리기</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">제목</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">제목</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
-              </div>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">내용</span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">내용</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
                 </div>
-                <textarea class="form-control" aria-label="With textarea"></textarea>
-              </div>
-              <div id="submitGrup">
-                <input type="file" name="profile">
-              </div>
+                <div id="submitGrup">
+                    <input type="file" name="profile">
+                </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
-              <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+                <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
-      <div class="modal fade"  id="studyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+<div class="modal fade"  id="studyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">종료하시겠습니까?</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">종료하시겠습니까?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-              <p>공부 시작 시간 : 14:30</p>
-              <p>공부 끝 시간   : 16:45</p>
-              <p>총 시간 : 2:15</p>
+                <p>공부 시작 시간 : 14:30</p>
+                <p>공부 끝 시간   : 16:45</p>
+                <p>총 시간 : 2:15</p>
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-              <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                    <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-{% endblock %}
+    </div>
+    {% endblock %}
