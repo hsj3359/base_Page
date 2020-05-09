@@ -1,6 +1,8 @@
 from django.db import models
 from main.models import StudyGroup
 from django.conf import settings
+from datetime import datetime, timedelta
+from django.shortcuts import redirect
 
 def file_path(instance, filename):
     return '{}/{}/{}'.format(instance.studyGroup.title, instance.author.username, filename)
@@ -15,6 +17,21 @@ class Schedule(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+    def checkSche(self):
+        # 일정 시간과 현재 시간을 비교하여 지났을 시, 자동으로 그 일정을 삭제
+        schDate = str(self.date)
+        schTime = str(self.time)
+        schYear = int(schDate[:4])
+        schMon = int(schDate[5:7])
+        schDay = int(schDate[8:10])
+        schHour = int(schTime[:2])
+        schMin = int(schTime[3:5])
+        schSec = int(schTime[6:8])
+        sch = datetime(schYear, schMon, schDay, schHour, schMin, schSec)
+        now = datetime.now()
+        return sch < now
+
 
 class Notice(models.Model):
     title = models.CharField(max_length=50)
