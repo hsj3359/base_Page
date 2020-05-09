@@ -14,5 +14,6 @@ urlpatterns = [
     path('book/', showBook, name='book'),
     path('book_main', showBookMain, name='book_main'),
     path('book_create', showCreateBook, name='book_create'),
-    path('list', showList, name='list'),
+    path('post', showPost, name='post'),
+    path('createPost/', createPost, name='createPost'),
 ]

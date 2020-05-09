@@ -8,3 +8,7 @@ class ScheduleAdmin(admin.ModelAdmin):
 @admin.register(Notice)
 class NoticeAdmin(admin.ModelAdmin):
     list_display = ['title', 'created_at']
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'created_at']

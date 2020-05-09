@@ -17,8 +17,6 @@ def showGroup(request, pk):
     user = request.user
     notice = Notice.objects.filter(studyGroup=studyGroup)
     scheForm = ScheduleForm()
-    for n in notice:
-        print(n.title)
     dict = {
         'group':studyGroup,
         'join':join,
@@ -73,7 +71,6 @@ def deleteSche(request, pk, pk2):
 
 def createNotice(request, pk):
     if request.method == 'POST':
-        print("create Notice")
         form = NoticeForm(request.POST)
         if form.is_valid():
             newNot = form.save(commit=False)
@@ -110,12 +107,29 @@ def showCreateBook(request, pk):
     }
     return render(request, 'group_control/book_create.html', dict)
 
-def showList(request, pk):
+def showPost(request, pk):
     studyGroup = StudyGroup.objects.get(id=pk)
+    post = Post.objects.filter(studyGroup=studyGroup)
+    form = PostForm()
     dict = {
         'group': studyGroup,
+        'post': post,
+        'form': form,
     }
-    return render(request, 'group_control/list.html', dict)
+    return render(request, 'group_control/post.html', dict)
+
+def createPost(request, pk):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.studyGroup = StudyGroup.objects.get(id=pk)
+            post.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 
 
 
