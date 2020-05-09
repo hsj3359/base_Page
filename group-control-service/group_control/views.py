@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from main.models import StudyGroup, Join
 from .models import *
 from .forms import *
+import time
 
 def showGroup(request, pk):
     # 그룹에 관한 데이터를 보여주는 기능
@@ -14,9 +15,14 @@ def showGroup(request, pk):
     studyGroup = StudyGroup.objects.get(id=pk)
     join = Join.objects.get(user=request.user, studyGroup=studyGroup)
     schedule = Schedule.objects.filter(studyGroup=studyGroup)
+    for s in schedule:
+        if s.checkSche():
+            s.delete()
+            schedule = Schedule.objects.filter(studyGroup=studyGroup)
     user = request.user
     notice = Notice.objects.filter(studyGroup=studyGroup)
     scheForm = ScheduleForm()
+
     dict = {
         'group':studyGroup,
         'join':join,
