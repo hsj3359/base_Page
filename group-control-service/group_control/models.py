@@ -14,6 +14,8 @@ class Schedule(models.Model):
     content = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
+    studySch = models.BooleanField(default=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['created_at']
@@ -53,3 +55,20 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+class Study(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
+    date = models.DateField(auto_now_add=True)
+    start = models.TimeField(auto_now_add=True)
+    end = models.TimeField(null=True)
+    total = models.IntegerField(null=True)
+    play = models.BooleanField(default=False)
+    finish = models.BooleanField(default=False)
+
+class Book(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
+    title = models.CharField(max_length=50)
+    content = models.CharField(max_length=9999, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)

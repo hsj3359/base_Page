@@ -35,26 +35,38 @@
         <span>게시판</span></a>
 </li>
 <script>
-        var start = true;
-        $('#closeModalBtn').on('click', function(){$('#modalBox').modal('hide');});
-        function change(){
-          //여기에 if문 넣어서 구분하면될것 같아요
-          if(start){
-            document.getElementById('StartButton').innerHTML = "공부중";
-            start = false;
-          }
-          else{
-            $('#studyModal').modal('show');
-            // 모달 안의 취소 버튼에 이벤트를 건다.
-           
-          }
-          
-        }
-      </script>
-<li class="nav-item">
-    <div id="Timer" class="pd-1"></div>
-    <button type="button" id="StartButton" class="btn btn-warning container" onclick="change()">공부시작</button>
-</li>
+function openStudyModal(){
+  $('#studyModal').modal('show');
+}
+</script>
+{% if study != None %}
+    {% for s in study %}
+        <script>console.log("{{s.play}}")</script>
+        {% if s.play %}
+            <li class="nav-item">
+                <div id="Timer" class="pd-1"></div>
+                <button type="button" id="StartButton" class="btn btn-warning container" onclick="openStudyModal()">공부 중...</button>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <div id="Timer" class="pd-1"></div>
+                <form action="{% url 'group:study' group.pk%}" method="post">
+                {% csrf_token %}
+                    <button type="submit" id="StartButton" class="btn btn-warning container">공부 시작</button>
+                </form>
+            </li>
+        {% endif %}
+    {% endfor %}
+    {% else %}
+    <li class="nav-item">
+        <div id="Timer" class="pd-1"></div>
+        <form action="{% url 'group:study' group.pk%}" method="post">
+        {% csrf_token %}
+        <button type="submit" id="StartButton" class="btn btn-warning container">공부 시작</button>
+        </form>
+    </li>
+    {% endif %}
+
 <li class="nav-item">
     <div id="Timer" class="pd-1"></div>
     <button type="button" id="QButton" class="btn btn-success container" data-toggle="modal" data-target="#creatModal">질문</button>
@@ -100,21 +112,26 @@
 
 <div class="modal fade"  id="studyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">종료하시겠습니까?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <p>공부 시작 시간 : 14:30</p>
-                <p>공부 끝 시간   : 16:45</p>
-                <p>총 시간 : 2:15</p>
+        <form action ="{% url 'group:endStudy' group.pk %}" method="post">{% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">종료하시겠습니까?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>공부 시작 시간 : 14:30</p>
+                    <p>공부 끝 시간   : 16:45</p>
+                    <p>총 시간 : 2:15</p>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-                    <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+                    <div class="modal-footer">
+
+
+                        <button type="submit" class="btn btn-primary">확인</button>
+                        <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     {% endblock %}

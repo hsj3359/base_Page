@@ -12,7 +12,7 @@ class StudyGroup(models.Model):
 class Join(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
-
+    personal_penalty = models.IntegerField(default=0)
 
 
 
