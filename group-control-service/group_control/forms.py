@@ -24,12 +24,15 @@ class NoticeForm(forms.ModelForm):
         fields = {'title', 'type', 'content'}
 
 class PostForm(forms.ModelForm):
-    # title = forms.CharField()
-    # content = forms.CharField()
-    # file = forms.FileField(required=False)
 
     class Meta:
         model = Post
         fields = {'title', 'content', 'file'}
+
+class BookForm(forms.ModelForm):
+
+    class Meta:
+        model = Book
+        fields = {'title', 'content'}
 
 

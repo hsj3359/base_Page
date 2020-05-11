@@ -26,7 +26,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">총 벌금</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800"> 3,000원</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"> {{totalPenalty}}원</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -157,7 +157,7 @@
             <div class="modal fade"  id="deleteModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <form method="post" action="{% url 'group:deleteSche' group.pk sche.pk %}">
+                  <form class = "delete-form" method="post" action="{% url 'group:deleteSche' group.pk sche.pk %}">
                     {% csrf_token %}
                     <div class="modal-header">
                       <h4 class="modal-title" id="deleteModalLabel">일정 삭제</h4>
@@ -280,21 +280,45 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
           <div id="linechart"></div>
           <script>
-                    var chart = c3.generate({
-                      bindto: "#linechart",
-                      data: {
-                        json :{
-                          date:['05.01','05.02','05.03','05.04'],
-                          sungjun:[1,2,3,4],
-                          sh:[5,4,3,2],
-                          jinsu:[1,2,5,3]
-                        },
-                        x :'date'
-                         
-                      }
-                      
-                    });
-                  </script>
+          var dateArray = new Array();
+          var valueArray = new Array();
+          {% for key, value in graph.items %}
+            dateArray.push('{{key}}');
+            {% for user, time in value.items %}
+            valueArray.push(['{{user}}', '{{time}}']);
+            {% endfor %}
+          {% endfor %}
+          for(var i=0;i<valueArray.length;i++){
+            for(var j=i+1;j<valueArray.length;j++){
+              if(valueArray[i][0]==valueArray[j][0]){
+                valueArray[i].push(valueArray[j][1]);
+              }
+            }
+          }
+          valueArray = valueArray.slice(0, 3);
+          var userArray = new Array();
+          var timeArray = new Array();
+
+          for(var i=0;i<valueArray.length;i++){
+            userArray.push(valueArray[i][0]);
+            timeArray.push(valueArray[i].slice(1, 5));
+          }
+          var jsonData = {
+	            date:dateArray,
+          }
+          for(var i=0;i<userArray.length;i++){
+            jsonData[userArray[i]] = timeArray[i];
+          }
+            var chart = c3.generate({
+              bindto: "#linechart",
+              data: {
+              json :jsonData,
+                x :'date'
+              }
+            });
+            console.log(c3.data.json)
+
+          </script>
         </div>
       </div>
     </div>
@@ -376,7 +400,7 @@
 
     modal_form.action = url;
 
-    $('#modifyModal').modal('show');
+    $('#deleteModal').modal('show');
   }
 </script>
 <script>
@@ -396,8 +420,8 @@
       sche_dict["title"] = "{{s.title}}";
       sche_dict["date"] = "{{s.date | date:'Y-m-d'}}";
       sche_dict["content"] = "{{s.content}}";
-      sche_dict["url"] = "{% url 'group:modifySche' group.pk s.pk %}";
-
+      sche_dict["modify_url"] = "{% url 'group:modifySche' group.pk s.pk %}";
+      sche_dict["delete_url"] = "{% url 'group:deleteSche' group.pk s.pk %}";
       sche.push(sche_dict);
     {% endfor %}
 
@@ -429,13 +453,14 @@
 
     var title = sche[i]["title"].replace(/\s/gi,"_");
     var content = sche[i]["content"].replace(/\s/gi,"_");
-    var url = sche[i]["url"]
+    var modify_url = sche[i]["modify_url"]
+    var delete_url = sche[i]["delete_url"]
 
     // 삭제 버튼
     var style = "'float: right; cursor: pointer; color:red;'"
     var toggle = "'modal'";
     var target = "'#deleteModal'";
-    var onclick = "openDeleteModal('"+url+"')";
+    var onclick = "openDeleteModal('"+delete_url+"')";
     var str_delete = "<span style=" + style + " data-toggle=" + toggle +
       "data-target="+ target +" onclick="+ onclick +">X</span>";
     h3.innerHTML += str_delete;
@@ -444,7 +469,7 @@
     var style = "'margin-right: 5px; float: right; cursor: pointer;'"
     var toggle = "'modal'";
     var target = "'#modifyModal'";
-    var onclick = "openModifyModal('"+title+"','"+content+"','"+url+"')";
+    var onclick = "openModifyModal('"+title+"','"+content+"','"+modify_url+"')";
     var str_modify = "<span style=" + style + " data-toggle=" + toggle +
       "data-target="+ target +" onclick="+ onclick +"><i class='fas fa-pen'></i></span>";
     h3.innerHTML += str_modify;

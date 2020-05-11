@@ -12,8 +12,10 @@ urlpatterns = [
     path('createNotice/', createNotice, name='createNotice'),
     path('chat/', showChat, name='chat'),
     path('book/', showBook, name='book'),
-    path('book_main', showBookMain, name='book_main'),
-    path('book_create', showCreateBook, name='book_create'),
+    path('book_main/<int:pk2>', showBookMain, name='book_main'),
+    path('book_create', createBook, name='book_create'),
     path('post', showPost, name='post'),
     path('createPost/', createPost, name='createPost'),
+    path('study/', startStudy, name='study'),
+    path('endStudy/', endStudy, name='endStudy'),
 ]
