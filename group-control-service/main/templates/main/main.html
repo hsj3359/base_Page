@@ -168,18 +168,18 @@
                   </br>
                   <h7>{{s.content}}</h7>
                   </br>
-                  <!--&lt;!&ndash; 상자 아래부분 &ndash;&gt;-->
-                  <!--<div class="mt-4 text-center small">-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-primary"></i> 고정일정-->
-                  <!--</span>-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-success"></i> 비정기일정-->
-                  <!--</span>-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-info"></i> 기타-->
-                  <!--</span>-->
-                  <!--</div>-->
+                  <!-- 상자 아래부분 -->
+                  <div class="mt-4 text-center small">
+                    {% if s.studySch %}
+                  <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> 일일 공부
+                  </span>
+                    {% else %}
+                    <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> 그룹 일정
+                  </span>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
