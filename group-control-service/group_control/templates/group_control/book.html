@@ -8,58 +8,276 @@
 <div class="container-fluid">
 
   <div id="book_main">
-    <div class="container">
-      <!-- 여기에 학습노트 적을수 있는 페이지연결 -->
-      <a href="../book_create"><i class="fas fa-plus fa-2x mt-2 mr-2" style="float: right; cursor: pointer;"></i></a>
-      <h1>학습노트</h1>
-      
-      <hr width="100%">
-      <div class="row">
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-3 mb-4">
-          <div class="card border-left-primary shadow h-100" >
-            <a href="../book_main"><!-- 여기에 적히 학습노트 볼수있는 페이지 연결 -->
-              <div class="card-body"  style="padding: 5px;">
-                <i class="fas fa-book fa-4x"></i>
-                <div id="label" style="float: right;">
-                  <p>05.05</p>
-                  <p>jinsu</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+    <style>
+      .box {
+        position: absolute;
+        left: 1000px;
+        top: 400px;
+        width: 100px;
+        height: 100px;
+        background-color: #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        <div class="col-xl-3 col-md-3 mb-4">
-          <div class="card border-left-primary shadow h-100" >
-            <a href="book_main.html">
-              <div class="card-body"  style="padding: 5px;">
-                <i class="fas fa-book fa-4x"></i>
-                <div id="label" style="float: right;">
-                  <p>05.05</p>
-                  <p>sungjun</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+      .CloneBox {
+        position: absolute;
+        left: 1000px;
+        top: 400px;
+        width: 50px;
+        height: 50px;
+        background-color: #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        <div class="col-xl-3 col-md-3 mb-4">
-          <div class="card border-left-primary shadow h-100" >
-            <a href="book_main.html">
-              <div class="card-body"  style="padding: 5px;">
-                <i class="fas fa-book fa-4x"></i>
-                <div id="label" style="float: right;">
-                  <p>05.05</p>
-                  <p>saehwan</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      
-      </div>
+      .toggleBtn {
+        position: absolute;
+        display: flex;
+        left: 200px;
+        top: 400px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      hr {
+        position: absolute;
+        display: flex;
+      }
+    </style>
+    <div class="box" id="box" onclick="select(event)">
+      영어
     </div>
+    <ul id="toggleBtn" style="display: none;">
+      <ol><button>삭제하기</button></ol>
+      <ol><button>복사하기</button></ol>
+      <ol><button onclick="clone()"> 주제생성</button></ol>
+    </ul>
+
+    <script>
+      var statArray = new Array;
+      var boxArray = new Array;
+      var ClickBox = null;
+      const $box = document.getElementById("box");
+      var Cleft;//현재 레프트 저장
+      var Ctop;// 현재 탑 저장
+      let toggle = false;//toggle버튼
+
+      saveStat($box);
+      boxArray.push($box);
+      move($box);
+
+
+      function move($object) {
+        const offset = { x: 0, y: 0 };
+        let isDown = false;
+
+        $object.addEventListener('mousedown', (event) => {
+          isDown = true;
+          offset.x = $object.offsetLeft - event.clientX;
+          offset.y = $object.offsetTop - event.clientY;
+          toggle = true;
+        })
+
+        $object.addEventListener('mouseup', (event) => {
+          isDown = false;
+        })
+
+        document.body.addEventListener('mousemove', (event) => {
+          if (!isDown) return;
+          Cleft = (event.clientX + offset.x);
+          Ctop = (event.clientY + offset.y);
+          $object.setAttribute('style', 'left :' + Cleft + 'px;' + 'top : ' + Ctop + 'px;')
+          toggle = false;
+          console.log($object);
+        })
+
+      }
+
+
+      function saveStat(object) {
+        //객체의 위치및 크기값 저장
+        console.log(object.id)
+        var id = object.id;
+        var left = object.offsetLeft;
+        var top = object.offsetTop;
+        var width = object.offsetWidth;
+        var height = object.offsetHeight;
+        var origin = null;
+        if (object.id == 'box') origin = null;
+        else origin = ClickBox;
+        var topicArray = new Array;
+        var tamp = {
+          id: id,
+          left: left,
+          top: top,
+          width: width,
+          height: height,
+          origin, origin,
+          topic: topicArray
+        };
+        statArray.push(tamp);
+        console.log(statArray[statArray.length - 1]);
+      }
+
+      function getAngle(x1, x2, y1, y2) {
+        var r = Math.atan2(x2 - x1, y2 - y1);
+        //alert(r+'radians');
+        if (r < 0)
+          r += Math.PI * 2;
+        var d = r * 180 / Math.PI;
+        while (d < 0)
+          d += 360;
+        //alert(d+'degrees'); 
+        return d;
+      }
+
+      function createLine(obj1, obj2) {
+        var obj1Stat = null;
+        var obj2Stat = null;
+        for (var i = 0; i < statArray.length; i++) {
+          if (obj1.id == statArray[i].id) obj1Stat = statArray[i];
+          if (obj2.id = statArray[i].id) obj2Stat = statArray[i];
+        }
+        var pointA, pointB, pointC;
+        pointA = [obj1Stat.left, obj1Stat.top];
+        pointB = [obj2Stat.left, obj2Stat.top];
+        pointC = [(pointA[0] + pointB[0]) / 2, (pointA[1] + pointB[1]) / 2]
+        console.log(pointA);
+        console.log(pointB);
+        var degree = (getAngle(pointA[0], pointB[0], pointA[1], pointB[1]));
+        switch (degree) {
+          case 0:
+            degree = 90;
+            break;
+          case 90:
+            degree = 0;
+            break;
+          case 180:
+            degree = 90;
+            break;
+          case 270:
+            degree = 0;
+            break;
+
+        }
+        console.log(degree);
+        var pointLength = cal_exe(pointA[0], pointB[0], pointA[1], pointB[1]);
+        var hr = document.createElement('hr');
+        hr.id = "hr" + statArray.length;
+        document.getElementById('book_main').append(hr);
+        hr = document.getElementById('hr' + statArray.length);
+        hr.setAttribute('style', 'left :' + pointC[0] + 'px;' + 'top : ' + pointC[1] + 'px; height:10px; width:' + pointLength + 'px;' + ' transform: rotate(' + degree + 'deg);')
+        saveStat(hr);
+
+
+      }
+
+      function cal_exe(x1, y1, x2, y2) {
+        var dis_x = x1 - x2;
+        var dix_y = y1 - y2;
+        result1 = Math.sqrt(Math.abs(dis_x * dis_x) + Math.abs(dix_y * dix_y));
+        return result1 / 10;
+      }
+
+      function selectPosition(num) {
+        var left = null;
+        var top = null;
+        var positionNum = null;
+        console.log(statArray[num].topic);
+        positionNum = statArray[num].topic.length;
+        console.log(positionNum);
+        statArray[num].topic.push(boxArray[boxArray.length - 1]);
+        switch (positionNum) {
+          case 0://북
+            left = Number(statArray[num].left);
+            top = Number(statArray[num].top) - 150;
+            break;
+          case 1://동북
+            left = Number(statArray[num].left) + 150;
+            top = Number(statArray[num].top) - 150;
+            break;
+          case 2://동
+            left = Number(statArray[num].left) + 150;
+            top = Number(statArray[num].top);
+            break;
+          case 3://동남
+            left = Number(statArray[num].left) + 150;
+            top = Number(statArray[num].top) + 150;
+            break;
+          case 4://남
+            left = Number(statArray[num].left);
+            top = Number(statArray[num].top) + 150;
+            break;
+          case 5://남서
+            left = Number(statArray[num].left) - 150;
+            top = Number(statArray[num].top) + 150;
+            break;
+          case 6://서
+            left = Number(statArray[num].left) - 150;
+            top = Number(statArray[num].top);
+            break;
+          case 7:   //서북
+            left = Number(statArray[num].left) - 150;
+            top = Number(statArray[num].top) - 150;
+            break;
+        }
+        console.log(left, top);
+        return { left, top };
+      }
+
+      function checkTopic() {
+        var num = null;
+        console.log(ClickBox);
+        for (var i = 0; i < statArray.length; i++) {//statArray에서 origin을 찾는다
+          if (ClickBox.id == statArray[i].id) {//오리진을 찾음
+            num = i;
+            if (statArray[i].topic.length == 8) return 9;
+            return num
+          }
+        }
+        return 9;
+      }
+
+      function clone() {
+        //하위 주제 생성
+        var check = checkTopic();
+        console.log(check);
+        if (check == 9) {
+          alert("하위 주제를 생성할 수 없습니다.");
+          return;
+        }
+        const CreateBox = $('#box').clone();//복사할 객체 임시저장
+        CreateBox.attr('id', 'CloneBox' + boxArray.length);// id를 변경;
+        // CreateBox.attr('class', 'CloneBox');
+        CreateBox.appendTo('#book_main');//html 추가
+        boxArray.push(document.getElementById('CloneBox' + boxArray.length));//객체를 배열에 저장
+        var position = selectPosition(check);
+        console.log(position);
+        boxArray[boxArray.length - 1].setAttribute('style', 'left :' + position.left + 'px;' + 'top : ' + position.top + 'px;');
+        console.log(boxArray[boxArray.length - 1].id);
+        move(boxArray[boxArray.length - 1])
+        saveStat(boxArray[boxArray.length - 1]);
+        createLine(ClickBox, boxArray[boxArray.length - 1])
+      }
+
+      function select(event) {
+        console.log("select")
+        const $selectBox = event.target;
+        console.log($selectBox);
+        if (toggle) {
+          console.log("toggle");
+          const $toggleBtn = document.getElementById("toggleBtn");
+          console.log($toggleBtn);
+          $toggleBtn.style.display = "block"
+          $toggleBtn.setAttribute('style', 'left :1000px; top : 400px;')
+          ClickBox = $selectBox;
+          toggle = false;
+        }
+      }
+    </script>
   </div>
 </div>
 
