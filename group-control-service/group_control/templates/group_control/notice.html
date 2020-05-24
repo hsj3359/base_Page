@@ -1,88 +1,64 @@
 {% extends 'group_control/base.html' %}
 
 {% block head %}
-  <title>Notice</title>
+<title>Notice</title>
 {% endblock %}
 
 {% block content %}
 <button type="button" data-toggle="modal" data-target="#noticeModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3" style="float: right;"><i class="fas fa-download fa-sm text-white-50"></i>글쓰기</button>
 <!-- Begin Page Content -->
-  <div class="container-fluid">
+<div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
-          <p class="mb-4">호스트가 공지사항을 작성하고 구성원은 볼 수 있습니다.</p>
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">공지사항</h1>
+  <br>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+          <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>등록일</th>
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>제목</th>
-                      <th>작성자</th>
-                      <th>등록일</th>
-                      
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>제목</th>
-                      <th>작성자</th>
-                      <th>등록일</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                   {% for n in notice %}
-                    <tr id ="quest1" onclick="viewModal('{{n.title}}')" style="cursor: pointer;">
-                      <td>{{n.title}}</td>
-                      <td>{{n.studyGroup.host}}</td>
-                      <td>{{n.created_at | date:'Y-m-d'}}</td>
-                    </tr>
-                   {% endfor %}
-                    <script>
-                      function viewModal(name){
-                        var modalName = document.getElementById("myModalLabel");
-                        modalName.innerHTML = name
-                        $('#questModal').modal('show');
-                      }
-                    </script>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>등록일</th>
+          </tr>
+          </tfoot>
+          <tbody>
+          {% for n in notice %}
+          <tr id ="quest1" onclick="viewModal('{{n.title}}', '{{n.content}}')" style="cursor: pointer;">
+            <td>{{n.title}}</td>
+            <td>{{n.studyGroup.host}}</td>
+            <td>{{n.created_at | date:'Y-m-d'}}</td>
+          </tr>
+          {% endfor %}
 
-        </div>
-<!-- /.container-fluid -->
-
-<!-- 모달 영역 -->
-  <div id="questModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">모달 타이틀</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        </div>
-        <div class="modal-body">죽어라!!</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">확인</button>
-          <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  
 
-  <div class="modal fade"  id="noticeModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form method="post" action="{% url 'group:createNotice' group.pk%}">
-          {% csrf_token %}
+</div>
+<!-- /.container-fluid -->
+
+
+<div class="modal fade"  id="noticeModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form method="post" action="{% url 'group:createNotice' group.pk%}">
+        {% csrf_token %}
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">공지 생성</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -114,9 +90,37 @@
           <button type="submit" class="btn btn-primary">추가</button>
           <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">취소</button>
         </div>
-        </form>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 모달 영역 -->
+<div id="noticeDetailModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">내용</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="closeModalBtn" data-dismiss="modal">확인</button>
       </div>
     </div>
   </div>
-  
+</div>
+
+<script>
+function viewModal(title, content){
+  var noticeModal = document.getElementById("noticeDetailModal");
+  var modal_title = noticeModal.querySelector(".modal-title");
+  var modal_body = noticeModal.querySelector(".modal-body");
+
+  modal_title.innerHTML = title;
+  modal_body.innerHTML = content;
+
+  $('#noticeDetailModal').modal('show');
+}
+</script>
 {% endblock %}

@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'group_control',
 ]
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -132,6 +130,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'config', 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DATE_INPUT_FORMATS = ["%d-%m-%Y"]
 

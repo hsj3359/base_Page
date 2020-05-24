@@ -145,12 +145,12 @@
 
           <!-- 임박한 과제 -->
           <div style="display:flex;">
-
+            {% for s in schedule %}
             <div class="col-xl-4 col-lg-5">
               <div class="card shadow mb-4">
                 <!-- 상자 헤더 -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">캡스톤 개발 7조 일일 공부</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">{{s.studyGroup.title}} {{s.title}}</h6>
                 </div>
                 <!-- 본문 -->
                 <div class="card-body">
@@ -158,70 +158,33 @@
                   <i class="fas fa-circle text-primary">마감 시간</i>
                 </span>
                   </br>
-                  <h7>2020년 5월 6일 00시 </h7>
+                  <h7 class="deadline">{{s.date | date:'m/d/Y'}} {{s.time | date:'h:i A'}} </h7>
                   </br>
-                  <h8 id="sample02"></h8>
+                  <h8 class="cal_time"></h8>
                   </br>
                   <span class="mr-2">
                   <i class="fas fa-circle text-success">내용</i>
                 </span>
                   </br>
-                  <h7>캡스톤 개발 7조 일일 공부</h7>
+                  <h7>{{s.content}}</h7>
                   </br>
-                  <!--&lt;!&ndash; 상자 아래부분 &ndash;&gt;-->
-                  <!--<div class="mt-4 text-center small">-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-primary"></i> 고정일정-->
-                  <!--</span>-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-success"></i> 비정기일정-->
-                  <!--</span>-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-info"></i> 기타-->
-                  <!--</span>-->
-                  <!--</div>-->
+                  <!-- 상자 아래부분 -->
+                  <div class="mt-4 text-center small">
+                    {% if s.studySch %}
+                  <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> 일일 공부
+                  </span>
+                    {% else %}
+                    <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> 그룹 일정
+                  </span>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
+            {% endfor %}
 
-            <!-- 임박한 과제 -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- 상자 헤더 -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">캡스톤 개발 7조 3차 발표</h6>
-                </div>
-                <!-- 본문 -->
-                <div class="card-body">
-                <span class="mr-2">
-                  <i class="fas fa-circle text-primary">마감 시간</i>
-                </span>
-                  </br>
-                  <h7>2020년 5월 6일 14시 </h7>
-                  </br>
-                  <h8 id="sample03"></h8>
-                  </br>
-                  <span class="mr-2">
-                  <i class="fas fa-circle text-success">내용</i>
-                </span>
-                  </br>
-                  <h7>캡스톤 개발 7조 3차 발표</h7>
-                  </br>
-                  <!--&lt;!&ndash; 상자 아래부분 &ndash;&gt;-->
-                  <!--<div class="mt-4 text-center small">-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-primary"></i> 고정일정-->
-                  <!--</span>-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-success"></i> 비정기일정-->
-                  <!--</span>-->
-                  <!--<span class="mr-2">-->
-                  <!--<i class="fas fa-circle text-info"></i> 기타-->
-                  <!--</span>-->
-                  <!--</div>-->
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -232,42 +195,49 @@
 
 </div>
 <script>
-                      const countDownTimer = function (id, date) {
-                        var _vDate = new Date(date); // 전달 받은 일자
-                        var _second = 1000;
-                        var _minute = _second * 60;
-                        var _hour = _minute * 60;
-                        var _day = _hour * 24;
-                        var timer;
+const countDownTimer = function (ele, date) {
+  var _vDate = new Date(date); // 전달 받은 일자
+  var _second = 1000;
+  var _minute = _second * 60;
+  var _hour = _minute * 60;
+  var _day = _hour * 24;
+  var timer;
 
-                        function showRemaining() {
-                          var now = new Date();
-                          var distDt = _vDate - now;
-                          if (distDt < 0) {
-                            clearInterval(timer);
-                            document.getElementById(id).textContent = '종료 되었습니다!';
-                            return;
-                            }
+  function showRemaining() {
+    var now = new Date();
+    var distDt = _vDate - now;
+    if (distDt < 0) {
+      clearInterval(timer);
+      ele.innerHTML = "종료 되었습니다!";
+      <!--document.getElementById(id).textContent = '종료 되었습니다!';-->
+      return;
+    }
 
-                            var days = Math.floor(distDt / _day);
-                            var hours = Math.floor((distDt % _day) / _hour);
-                            var minutes = Math.floor((distDt % _hour) / _minute);
-                            var seconds = Math.floor((distDt % _minute) / _second);
+    var days = Math.floor(distDt / _day);
+    var hours = Math.floor((distDt % _day) / _hour);
+    var minutes = Math.floor((distDt % _hour) / _minute);
+    var seconds = Math.floor((distDt % _minute) / _second);
 
-                            //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-                            document.getElementById(id).textContent = days + '일 ';
-                            document.getElementById(id).textContent += hours + '시간 ';
-                            document.getElementById(id).textContent += minutes + '분 ';
-                            document.getElementById(id).textContent += seconds + '초';
-                          }
+    //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+    ele.innerHTML = days + '일 ';
+    ele.innerHTML += hours + '시간 ';
+    ele.innerHTML += minutes + '분 ';
+    ele.innerHTML += seconds + '초';
+  }
 
-                          timer = setInterval(showRemaining, 1000);
-                        }
+     timer = setInterval(showRemaining, 1000);
+   }
 
-                        var dateObj = new Date();
-                        dateObj.setDate(dateObj.getDate() + 1);
+var dateObj = new Date();
+dateObj.setDate(dateObj.getDate() + 1);
 
-                        countDownTimer('sample02', '05/06/2020 00:00 AM');
-                        countDownTimer('sample03', '05/06/2020 02:00 PM');
-                      </script>
+var cal_time = document.querySelectorAll(".cal_time");
+var deadline = document.querySelectorAll(".deadline")
+for(var i=0;i<cal_time.length;i++){
+  var str = deadline[i].innerHTML;
+  countDownTimer(cal_time[i], str);
+}
+
+
+</script>
 {% endblock %}
