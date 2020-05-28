@@ -9,14 +9,14 @@ class ScheduleAdmin(admin.ModelAdmin):
 class NoticeAdmin(admin.ModelAdmin):
     list_display = ['title', 'created_at']
 
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_at']
-
-@admin.register(Study)
-class StudyAdmin(admin.ModelAdmin):
-    list_display = ['user', 'studyGroup', 'total', 'play']
-
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ['author', 'studyGroup', 'title', 'created_at']
+
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'studyGroup']
+
+@admin.register(Chat)
+class ChatAdmin(admin.ModelAdmin):
+    list_display = ['author', 'studyGroup', 'message', 'created_at']

@@ -23,16 +23,22 @@ class NoticeForm(forms.ModelForm):
         model = Notice
         fields = {'title', 'type', 'content'}
 
-class PostForm(forms.ModelForm):
-
-    class Meta:
-        model = Post
-        fields = {'title', 'content', 'file'}
-
 class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
         fields = {'title', 'content'}
+
+class RoomForm(forms.ModelForm):
+
+    class Meta:
+        model = Room
+        fields = {'title'}
+
+class ChatForm(forms.ModelForm):
+
+    class Meta:
+        model = Chat
+        fields = {'message', 'file'}
 
 

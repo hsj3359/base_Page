@@ -10,7 +10,7 @@
   <div id="book_main">
     <div class="container">
       <!-- 여기에 학습노트 적을수 있는 페이지연결 -->
-      <a href="../book_create"><i class="fas fa-plus fa-2x mt-2 mr-2" style="float: right; cursor: pointer;"></i></a>
+      <a href="../book/create"><i class="fas fa-plus fa-2x mt-2 mr-2" style="float: right; cursor: pointer;"></i></a>
       <h1>학습노트</h1>
       
       <hr width="100%">
@@ -19,7 +19,7 @@
         {% for b in book %}
         <div class="col-xl-3 col-md-3 mb-4">
           <div class="card border-left-primary shadow h-100" >
-            <a href="../book_main/{{b.pk}}"><!-- 여기에 적히 학습노트 볼수있는 페이지 연결 -->
+            <a href="../book/content/{{b.pk}}"><!-- 여기에 적히 학습노트 볼수있는 페이지 연결 -->
               <div class="card-body"  style="padding: 5px;">
                 <i class="fas fa-book fa-4x"></i>
                 <div id="label" style="float: right;">
