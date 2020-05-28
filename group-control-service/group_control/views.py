@@ -132,22 +132,23 @@ def showChat(request, pk, pk2):
         }
     return render(request, 'group_control/chatSample.html', dict)
 
-# def showChat(request, pk, pk2):
-#     user = request.user
-#     studyGroup = StudyGroup.objects.get(id=pk)        # 그룹 데이터
-#     room = Room.objects.get(id=pk2)
-#     print(room.title)
-#
+def showChat(request, pk, pk2):
+    user = request.user
+    studyGroup = StudyGroup.objects.get(id=pk)        # 그룹 데이터
+    room = Room.objects.get(id=pk2)
+    join = Join.objects.filter(studyGroup=studyGroup)
+    chat = Chat.objects.filter(studyGroup=studyGroup, room=room)
+    form = ChatForm()
 
-#     dict = {
-#         'user': user,
-#         'group': studyGroup,
-#         'room': room,
-#         'join': join,
-#         'chat': chat,
-#         'form': form,
-#     }
-#     return render(request, 'group_control/chatSample.html', dict)
+    dict = {
+        'user': user,
+        'group': studyGroup,
+        'room': room,
+        'join': join,
+        'chat': chat,
+        'form': form,
+    }
+    return render(request, 'group_control/chatSample.html', dict)
 
 # book.html
 def showBookList(request, pk):
