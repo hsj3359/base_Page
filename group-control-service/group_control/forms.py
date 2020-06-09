@@ -27,7 +27,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = {'title', 'content'}
+        fields = {'title', 'subject', 'content'}
 
 class RoomForm(forms.ModelForm):
 
@@ -39,6 +39,21 @@ class ChatForm(forms.ModelForm):
 
     class Meta:
         model = Chat
-        fields = {'message', 'file'}
+        fields = {'message', 'photo'}
+
+class PostForm(forms.ModelForm):
+    title = forms.CharField(label='')
+    widget = forms.Textarea(attrs={
+        'row': '5',
+        'cols': '50',
+        'placeholder': '140자까지 입력 가능합니다.'
+    })
+    content = forms.CharField(label='', widget=widget)
+    subject = forms.CharField(label='')
+    photo = forms.ImageField(label='', required=False)
+
+    class Meta:
+        model = Post
+        fields = {'title', 'content', 'subject', 'photo'}
 
 

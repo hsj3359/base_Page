@@ -21,7 +21,13 @@
 </head>
 
 <body id="page-top" >
-
+{% if messages %}
+{% for message in messages %}
+    <script>
+        alert("{{message.message}}")
+    </script>
+{% endfor %}
+{% endif %}
 <!-- Page Wrapper -->
 <div id="wrapper">
 

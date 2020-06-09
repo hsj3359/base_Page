@@ -10,11 +10,18 @@
 <form action="{% url 'group:book_create' group.pk%}" method="post">
   {% csrf_token %}
 <div class="container-fluid">
+
   <div class="input-group">
     <div class="input-group-prepend">
       <span class="input-group-text" style="margin-bottom: 20px;">제목</span>
     </div>
     <input name="{{ form.title.html_name }}" class="form-control" aria-label="With textarea">
+  </div>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" style="margin-bottom: 20px;">주제</span>
+    </div>
+    <input name="{{ form.subject.html_name }}" class="form-control" aria-label="With textarea">
   </div>
   <div class="input-group" >
     <div class="input-group-prepend">

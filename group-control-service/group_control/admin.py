@@ -20,3 +20,7 @@ class RoomAdmin(admin.ModelAdmin):
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
     list_display = ['author', 'studyGroup', 'message', 'created_at']
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['author', 'studyGroup', 'title', 'photo']

@@ -12,8 +12,11 @@ urlpatterns = [
     path('notice/create/', createNotice, name='createNotice'),
     path('createRoom/', createRoom, name='createRoom'),
     path('chat/<int:pk2>', showChat, name='chat'),
+    path('upload/<int:pk2>', uploadImage, name="upload"),
     path('book/', showBookList, name='book'),
     path('book/content/<int:pk2>', showBookContent, name='book_main'),
     path('book/create/', createBook, name='book_create'),
-
+    path('video/', showVideo, name="video"),
+    path('post/', showPost, name="post"),
+    path('createPost/', createPost, name="createPost"),
 ]
