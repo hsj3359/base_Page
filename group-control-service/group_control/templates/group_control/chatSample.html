@@ -2,6 +2,7 @@
 {% load static %}
 {% block head %}
 <title>Chat</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -10,67 +11,20 @@
 </textarea>
 <input required="required" type="text" class="form-control" id="chat-message-input">
 <label class="btn btn-primary" id="chat-submit" type="submit">전송</label>
-
 <script>
-    function printChat() {
-        {% for c in chat %}
-        document.querySelector('#chat-log').value += ("{{c.author}}" + ' : ' + "{{c.message}}" + '\n');
-        {% endfor %}
-    }
-    printChat();
-
     var room = '{{group.pk}}'+'_'+'{{room.pk}}';
+    var user = '{{user.username}}';
+    var chat_url = "{% url 'group:chat' group.pk room.pk %}";
+    var upload_url = "{% url 'group:upload' group.pk room.pk %}";
+    var chat_log = document.getElementById("chat-log");
 
-    var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + room +'/');
-
-    chatSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var author = data['author'];
-        var message = data['message'];
-        document.querySelector('#chat-log').value += (author + ' : ' + message + '\n');
-    };
-
-    chatSocket.onopen=function(e) {
-        console.log("connection success!");
-    };
-
-    chatSocket.onclose = function(e) {
-        console.log("Chat socket closed unexpectedly");
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter를 입력한 경우
-            document.querySelector('#chat-submit').click();
-        }
-    };
-
-    document.querySelector('#chat-submit').onclick = function(e) {
-        var messageInputDom = document.querySelector('#chat-message-input');
-        var author = "{{ user.username }}";
-        var message = messageInputDom.value;
-        var created_at = new Date();
-        chatSocket.send(JSON.stringify({
-            'author' : author,
-            'message': message,
-            'created_at': created_at
-        }));
-
-        messageInputDom.value = '';
-
-        $.ajax({
-            type: "post",
-            url: "{% url 'group:chat' group.pk room.pk %}",
-            data: {
-                'author': author,
-                'message': message,
-                'created_at': created_at,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'},
-            dataType: "json",
-            success: console.log("Send message to server!"),
-        });
-    };
+    {% for c in chat %}
+    chat_log.innerHTML += "{{c.author}}" +" : " + "{{c.message}}" + "\n";
+        {% if c.photo != "undefined" %}
+            chat_log.innerHTML += "=> {{c.photo}}" + "\n";
+        {% endif %}
+    {% endfor %}
 </script>
+<script src="{% static 'js/websock.js' %}?ver=1"></script>
+<script src="{% static 'js/chat_ajax.js' %}?ver=1"></script>
 {% endblock %}

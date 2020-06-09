@@ -1,21 +1,24 @@
 {% extends 'group_control/base.html' %}
 
 {% block head %}
-<title>List</title>
+<title>Post</title>
 {% endblock %}
 
 {% block content %}
-<button type="button" data-toggle="modal" data-target="#newListModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3" style="float: right;"><i class="fas fa-download fa-sm text-white-50"></i>글쓰기</button>
+<a href="/group/{{group.pk}}/createPost" type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3" style="float: right;">
+    <i class="fas fa-download fa-sm text-white-50"></i>업로드
+</a>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">게시판</h1>
+    <h1 class="h3 mb-2 text-gray-800">자료실</h1>
 
+    {% for subject, post in post_dict.items %}
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">게시판</h6>
+            <h6 class="m-0 font-weight-bold text-primary">{{subject}}</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -24,31 +27,28 @@
                     <tr>
                         <th>제목</th>
                         <th>작성자</th>
+                        <th>주제</th>
+                        <th>파일명</th>
                         <th>등록일</th>
-
                     </tr>
                     </thead>
-                    <tfoot>
-                    <tr>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>등록일</th>
-                    </tr>
-                    </tfoot>
+
                     <tbody>
                     {% for p in post %}
                     <tr id ="quest1" onclick="viewModal('{{p.title}}', '{{p.content}}', '{{p.file}}')" style="cursor: pointer;">
                         <td>{{p.title}}</td>
-                        <td>{{p.studyGroup.host}}</td>
+                        <td>{{p.author}}</td>
+                        <td>{{p.subject}}</td>
+                        <td>{{p.photo}}</td>
                         <td>{{p.created_at | date:'Y-m-d'}}</td>
                     </tr>
                     {% endfor %}
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    {% endfor %}
 
 </div>
 <!-- /.container-fluid -->
@@ -57,7 +57,7 @@
 <div class="modal fade"  id="newListModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="post" action="{% url 'group:createPost' group.pk %}" enctype="multipart/form-data">
+            <form>
                 {% csrf_token %}
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">게시물 생성</h4>

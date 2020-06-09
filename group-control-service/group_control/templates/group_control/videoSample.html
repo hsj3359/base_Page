@@ -1,0 +1,10 @@
+{% extends 'group_control/base.html' %}
+{% load static %}
+{% block head %}
+<title>Video Room</title>
+<link rel="stylesheet" href="{% static 'css/video.css' %}" />
+{% endblock %}
+{% block content %}
+    <video class="video" autoplay playsinline></video>
+    <script src="{% static 'js/video.js' %}"></script>
+{% endblock %}

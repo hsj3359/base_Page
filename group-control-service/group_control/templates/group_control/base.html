@@ -27,6 +27,12 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link" href="/group/{{group.pk}}/post">
+        <i class="fas fa-download"></i>
+        <span>자료실</span></a>
+</li>
+
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
         <span>참여 인원</span>
@@ -34,9 +40,9 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <ul>
-                <li class="collapse-item">박세환</li>
-                <li class="collapse-item">박진수</li>
-                <li class="collapse-item">황성준</li>
+                {% for j in join %}
+                <li class="collapse-item">{{j.user.username}}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>

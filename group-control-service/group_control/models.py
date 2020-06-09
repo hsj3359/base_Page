@@ -2,9 +2,12 @@ from django.db import models
 from main.models import StudyGroup
 from django.conf import settings
 from datetime import datetime
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 def file_path(instance, filename):
-    return '{}/{}/{}'.format(instance.studyGroup.title, instance.room.title, filename)
+    from time import strftime
+    return '{}/{}/{}'.format(instance.studyGroup.title, strftime('%y-%m-%d'), filename)
 
 class Schedule(models.Model):
     title = models.CharField(max_length=50)
@@ -47,6 +50,7 @@ class Book(models.Model):
     studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
     title = models.CharField(max_length=50)
     content = models.CharField(max_length=9999, null=True)
+    subject = models.CharField(max_length=50, default="default")
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Room(models.Model):
@@ -57,6 +61,28 @@ class Chat(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, default=0)
-    file = models.FileField(upload_to=file_path, blank=True, null=True)
+    photo = ProcessedImageField(upload_to=file_path,
+                                processors=[ResizeToFill(100, 100)],
+                                format='JPEG',
+                                options={'quality': 90},
+                                null=True
+                                )
     message = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    studyGroup = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, default=0)
+    title = models.CharField(max_length=50)
+    content = models.CharField(max_length=9999, null=True)
+    subject = models.CharField(max_length=50)
+    photo = ProcessedImageField(upload_to=file_path,
+                                processors=[ResizeToFill(100, 100)],
+                                format='JPEG',
+                                options={'quality': 90},
+                                null=True
+                                )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
