@@ -12,16 +12,16 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <div class="container">
   <!-- 여기에 학습노트 적을수 있는 페이지연결 -->
-  <a href="/group/{{group.pk}}/book/create"><i class="fas fa-plus fa-2x mt-2 mr-2" style="float: right; cursor: pointer;"></i></a>
+  <a href="/group/{{group.pk}}/book/create"><i class="fas fa-plus fa-2x mt-2 mr-2"
+      style="float: right; cursor: pointer;"></i></a>
   <h1>학습노트</h1>
 
-  <div class="searchbox">
+  <div class="searchbox mt-3">
     <div class="header">
-      <input onkeyup="filter()" type="text" id="value" placeholder="Type to Search">
+      <input onkeyup="filter()" type="text" id="value" placeholder="검색어를 입력하세요">
     </div>
     <div id='listContainer' class="container">
       <div class="item" id='cloneItem'>
-        <span class="name" id='listName'></span>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
     {% for b in book %}
     <div class="col-xl-3 col-md-3 mb-4">
       <div class="card border-left-primary shadow h-100">
-        <a href="/group/{{group.pk}}/book/content/{{b.pk}}">
+        <a class="adr" href="/group/{{group.pk}}/book/content/{{b.pk}}">
           <!-- 여기에 적히 학습노트 볼수있는 페이지 연결 -->
           <div class="card-body" style="padding: 5px;">
             <i class="fas fa-book fa-4x"></i>
@@ -50,24 +50,40 @@
 </div>
 
 <script>
-  var item = document.getElementById("cloneItem");
+  var item = document.getElementById("cloneItem");//이름과 주소가 들어갈 자리
   var data = document.getElementsByClassName('dataName');
+  var adr = document.getElementsByClassName('adr');
   var listContainer = document.getElementById('listContainer')
   var inputName = document.getElementById('listName');
-  inputName.innerHTML = data[0].innerHTML
-  for (var i = 0; i < data.length - 1; i++) {
-    var cloneItem = item.cloneNode();
-    cloneItem.id = i + 1;
-    listContainer.appendChild(cloneItem);
-    var tampItem = document.getElementById(i + 1);
-    var cloneName = inputName.cloneNode();
-    cloneName.id = (i + 1) + "name"
-    tampItem.appendChild(cloneName);
-    var tampName = document.getElementById((i + 1) + 'name');
-    tampName.innerHTML = data[i + 1].innerHTML;
-    console.log(i);
+
+
+
+  function makeList() {
+    var count = data.length;
+    for (var i = 0; i < count; i++) {
+      var cloneData = adr[i].cloneNode();
+      cloneData.id = i + "adr";
+      cloneData.className = "name";
+      if (i == 0) {
+        item.appendChild(cloneData);
+        document.getElementById(i + "adr").innerHTML = data[i].innerText;
+        console.log(cloneData, i);
+      }
+      else {
+        var cloneItem = item.cloneNode();//복사할 객체저장
+        cloneItem.id = i;
+        listContainer.appendChild(cloneItem);
+        var tamp = document.getElementById("" + i);
+        tamp.append(cloneData);
+        document.getElementById(i + "adr").innerHTML = data[i].innerText;
+
+      }
+    }
   }
-   function filter() {
+
+  makeList();
+
+  function filter() {
     var value, Text, name, itemArray;
     value = document.getElementById("value").value.toUpperCase();
     name = document.getElementsByClassName('name');
@@ -89,6 +105,7 @@
         }
       }
     }
-    }
+
+  }
 </script>
 {% endblock %}

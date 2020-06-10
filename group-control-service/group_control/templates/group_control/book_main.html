@@ -1,106 +1,43 @@
 {% extends 'group_control/base.html' %}
 {% load static %}
 {% block head %}
+<title>Book</title>
+<style>
+      pre {
+        background-color: whitesmoke;
+      }
+</style>
 {% endblock %}
 
 {% block content %}
- 
+
 <div class="container-fluid">
-
-  <div id="book_main">
-    <div class="container" style=" background-image:url({% static 'book.jpg' %}); width:564px; height: 864px; padding:30px;">
-      <button onclick="makeNextPage()" style="float: right;">></button>
-      <button onclick="makePriPage()" style="float: left;"><</button>
-      <div class="text-center" id="title"> 
-          <h1>{{book.title}}</h1>
-          
-
-      </div>
-      <div id="text" onkeypress="selectKey()" style="line-height: 1.57em; margin-top: 15px; word-break: break-all;">
-      </div>
-      <Script>
-        var pageNum =0;//현재 본문 페이지 번째
-        var page_list = new Array();
-        var tamp = document.getElementById('text');
-        function makeNextPage(){
-          console.log("메이크 넥스트 페이지")
-          console.log(pageNum);
-          var apendText = "";//현재페이지의 글자를 저장하는 스트링
-          if(pageNum>=page_list.length-1){
-            alert("마지막 입니다.!")
-            
-          }
-          else{
-            pageNum +=1;
-            apendText = page_list[pageNum];
-            tamp.innerHTML=apendText;
-          }
-        
-        }
-        function loadPage(){
-          console.log("로드페이지")     
-          var text_tamp = "";// 잠시 한줄을 저장하는 스트링
-          var line_num=0; // 글자수
-          var text_main=""; // 본문 글자전부를 저장하는 스트링
-          var text_list = new Array(); // 줄순으로 담을 텍스트 배열
-          <!--text_main = "가가가가가㉾가가가㉾가가가㉾가㉾가가㉾가가가㉾가가가㉾가가가가가㉾가가㉾가가가가가㉾가가가가가가가㉾가가가㉾가가가가㉾가가가가가가㉾가가가가가가가가㉾가가가가가가가㉾가가가㉾가가가가가가가가가가가가㉾가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가㉾가가가가가가가가가가가가가가㉾가가가가가가㉾가가가가가가㉾가가가가가가가가가가가가가가가가가가가㉾가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가";-->
-          text_main = "{{book.content|linebreaks}}";
-          //개행문자 제거하기(성준)
-          for(var i=0; i<text_main.length; i++){// 텍스트 배열 완성
-            line_num +=1;
-            if(line_num==30){
-              //31 번째 글자 다음줄
-              text_list.push(text_tamp+"<br>");
-              text_tamp ="";
-              line_num=0;
-            }
-            if(text_main[i]=="㉾"){
-              //개행문자 다음줄
-              text_list.push(text_tamp+"<br>");
-              text_tamp ="";
-              line_num=0;
-              i+=1;
-            }
-            text_tamp += text_main[i];
-          }
-          var count =0;
-          text_tamp="";
-          for(var i=0; i< text_list.length; i++){
-            count +=1;
-            text_tamp += text_list[i];
-            if(i==text_list.length-1){
-              page_list.push(text_tamp);
-              count=0;
-              text_tamp="";
-              break;
-            }
-            if(count==29){
-              page_list.push(text_tamp);
-              count=0;
-              text_tamp="";
-            }
-            
-          }          
-          tamp.innerHTML = page_list[pageNum];
-         
-        }
-        loadPage();//처음 페이지 로드시 불러오는 함수
-        function makePriPage(){
-          console.log("메이크 프리 페이지")
-          console.log(pageNum);
-          var apendText = "";//현재페이지의 글자를 저장하는 스트링
-          if(pageNum<=0){
-            alert("처음입니다.!");
-          }
-          else{
-            pageNum-=1;
-            apendText = page_list[pageNum];
-            tamp.innerHTML=apendText;
-          }
-         
-        }
-      </Script>
-    </div>
+  <button style="float: right;" onclick="markDown()">MarkDown</button>
+  <button style="float: right;" onclick="origin()">일반</button>
+  <div id='head'>
+    <H1>{{book.title}}</H1>
+    <hr style="width: 100%;">
   </div>
+  <div id='contents'>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    var contents = document.getElementById("contents");
+    var str = "{{book.content|linebreaksbr}}";
+    contents.innerHTML = str;
+
+    console.log(str);
+
+    function origin() {
+      contents.innerHTML = str;
+    }
+    function markDown() {
+      var a = contents.innerText;
+      contents.innerHTML = marked(a);
+    }
+
+  </script>
+
+
 </div>
 {% endblock %}
