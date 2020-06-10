@@ -4,32 +4,47 @@
 {% endblock %}
 
 {% block content %}
-<script>
-
-</script>
 <form action="{% url 'group:book_create' group.pk%}" method="post">
   {% csrf_token %}
-<div class="container-fluid">
+  <div class="container-fluid">
 
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text" style="margin-bottom: 20px;">제목</span>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="margin-bottom: 20px;">제목</span>
+      </div>
+      <input name="{{ form.title.html_name }}" class="form-control" aria-label="With textarea">
     </div>
-    <input name="{{ form.title.html_name }}" class="form-control" aria-label="With textarea">
-  </div>
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text" style="margin-bottom: 20px;">주제</span>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" style="margin-bottom: 20px;">주제</span>
+      </div>
+      <input name="{{ form.subject.html_name }}" class="form-control" aria-label="With textarea">
     </div>
-    <input name="{{ form.subject.html_name }}" class="form-control" aria-label="With textarea">
-  </div>
-  <div class="input-group" >
-    <div class="input-group-prepend">
-      <span class="input-group-text">내용</span>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">내용</span>
+      </div>
+      <textarea name="{{ form.content.html_name }}" class="form-control" aria-label="With textarea"
+        style="height: 750px;" id="text" onkeyup="change()"></textarea>
     </div>
-    <textarea name="{{ form.content.html_name }}" class="form-control" aria-label="With textarea" style="height: 750px;"></textarea>
+    <div id="changeText">
+
+    </div>
+    <button type="submit" class="btn btn-primary" style="float: right;">제출</button>
   </div>
-  <button type="submit" class="btn btn-primary" style="float: right;">제출</button>
-</div>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+  }
+  function change() {
+    var value = document.getElementById('text').value;
+    var input = document.getElementById('changeText');
+    input.innerHTML = marked(value);
+  }
+</script>
+
+
 {% endblock %}
