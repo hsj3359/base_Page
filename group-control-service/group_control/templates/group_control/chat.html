@@ -18,51 +18,9 @@
 <div class="container-fluid" style="padding-bottom: 100px;">
   <!-- Page Heading -->
   <div id="chat" style="height: 550px; overflow-y: scroll;">
-
-    <!-- 대화 하나의 시이이이이이이이이이이이이이작 -->
-    <!-- 스타일 정의 필요(배경색 투명)-->
-    <div
-            class="col-4 mt-3 mb-1"
-            style="background-color: rgba(0, 0, 0, 0);"
-    >
-      <!-- 스타일 정의 필요(배경색, 보더 투명) -->
-      <div class="card" style="
-                    background-color: rgba(0, 0, 0, 0);
-                    border-color: rgba(0, 0, 0, 0);
-                  ">
-        <!-- 스타일 정의 필요(위쪽) -->
-        <div style="
-                      padding-top: 1.25rem;
-                      background-image: url('{% static 'img/talk_top2.png' %}');
-                      background-size: 100%, 100%;
-                      background-repeat: no-repeat;
-                    "
-        ></div>
-        <!-- 스타일 정의 필요(가운데) -->
-        <div
-                style="
-                      flex: 1 1 auto;
-                      background-image: url('{% static 'img/talk_main2.png' %}');
-                      background-size: 100%, 100%;
-                      padding: 0 1.25rem 1rem 1.25rem;
-                    "
-        >
-          <h5 class="card-title">진수</h5>
-          토익 스터디 회의를 시작한다!
-        </div>
-        <!-- 스타일 정의 필요(아래) -->
-        <div
-                class="card-body"
-                style="
-                      background-image: url('{% static 'img/talk_bot2.png' %}');
-                      background-size: 100%, 100%;
-                      background-repeat: no-repeat;
-                    "
-        ></div>
-      </div>
-    </div>
-    <!-- 대화 하나의 끄으으으으으으으으ㅡ으으으으으읕 -->
-
+    <div id="chat-log">
+    {% for c in chat %}
+    {% if c.author == user %}
     <!-- 나의 톡 부분 시이이이이이ㅣ이이이이이작 -->
     <!-- 스타일 정의 필요(칸 띄우기 위함)-->
     <div style="width: 100%; display: inline-block;">
@@ -97,8 +55,8 @@
                         padding: 0 1.25rem 1rem 1.25rem;
                       "
           >
-            <h5 class="card-title">세환</h5>
-            be동사가 뭐지 아는 사람?
+            <h5 class="card-title">{{c.author}}</h5>
+            {{c.message}}
           </div>
           <!-- 스타일 정의 필요(아래) -->
           <div
@@ -113,9 +71,7 @@
       </div>
     </div>
     <!-- 나의 톡 끄으으으으으으으으으읕 -->
-
-
-
+    {% else %}
     <!-- 대화 하나의 시이이이이이이이이이이이이이작 -->
     <!-- 스타일 정의 필요(배경색 투명)-->
     <div
@@ -123,16 +79,12 @@
             style="background-color: rgba(0, 0, 0, 0);"
     >
       <!-- 스타일 정의 필요(배경색, 보더 투명) -->
-      <div
-              class="card"
-              style="
+      <div class="card" style="
                     background-color: rgba(0, 0, 0, 0);
                     border-color: rgba(0, 0, 0, 0);
-                  "
-      >
+                  ">
         <!-- 스타일 정의 필요(위쪽) -->
-        <div
-                style="
+        <div style="
                       padding-top: 1.25rem;
                       background-image: url('{% static 'img/talk_top2.png' %}');
                       background-size: 100%, 100%;
@@ -148,8 +100,8 @@
                       padding: 0 1.25rem 1rem 1.25rem;
                     "
         >
-          <h5 class="card-title">성준</h5>
-          문법 책을 봐봐
+          <h5 class="card-title">{{c.author}}</h5>
+          {{c.message}}
         </div>
         <!-- 스타일 정의 필요(아래) -->
         <div
@@ -163,8 +115,9 @@
       </div>
     </div>
     <!-- 대화 하나의 끄으으으으으으으으ㅡ으으으으으읕 -->
-
-
+    {% endif %}
+    {% endfor %}
+    </div>
     <!-- 통화와 질문버튼 위치 -->
     <div style="position: absolute; top: 100px; right: 50px;">
       <a href="https://hangouts.google.com/?hl=ko" target="blank"
@@ -199,12 +152,31 @@
       <textarea
               class="form-control"
               aria-label="With textarea"
+              required="required"
+              id="chat-message-input"
       ></textarea>
-      <button style="width: 70px;">전송</button>
+      <button style="width: 70px;" id="chat-submit" type="submit">전송</button>
     </div>
   </div>
   <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
 
+<script>
+    var room = '{{group.pk}}'+'_'+'{{room.pk}}';
+    var user = '{{user.username}}';
+    var chat_url = "{% url 'group:chat' group.pk room.pk %}";
+    var upload_url = "{% url 'group:upload' group.pk room.pk %}";
+    var chat_log = document.getElementById("chat-log");
+
+    var myChatTopUrl = '{% static 'img/talk_top_my2.png' %}';
+    var myChatMidUrl = '{% static 'img/talk_main_my2.png' %}';
+    var myChatBotUrl = '{% static 'img/talk_bot_my2.png' %}';
+
+    var otherChatTopUrl = '{% static 'img/talk_top2.png' %}';
+    var otherChatMidUrl = '{% static 'img/talk_main2.png' %}';
+    var otherChatBotUrl = '{% static 'img/talk_bot2.png' %}';
+</script>
+<script src="{% static 'js/websock.js' %}?ver=1"></script>
+<script src="{% static 'js/chat_ajax.js' %}?ver=1"></script>
 {% endblock %}
