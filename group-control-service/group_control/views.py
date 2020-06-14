@@ -30,12 +30,16 @@ def showGroup(request, pk):
             print("기간이 지난 일정입니다.")
     schedule = Schedule.objects.filter(studyGroup=studyGroup)
     notice = Notice.objects.filter(studyGroup=studyGroup)
+    post = Post.objects.filter(studyGroup=studyGroup)
+    chat = Chat.objects.filter(studyGroup=studyGroup)
     form = ScheduleForm()
     dict = {
         'schedule':schedule,
         'notice':notice,
         'form': form,
         'user': request.user,
+        'post': post,
+        'chat': chat
     }
     dict.update(base_dict)
     return render(request, "group_control/index.html", dict)
@@ -143,7 +147,7 @@ def showChat(request, pk, pk2):
             'rooms': rooms,
             'user': user
         }
-    return render(request, 'group_control/chatSample.html', dict)
+    return render(request, 'group_control/chat.html', dict)
 
 #대화방 파일 업로드
 def uploadImage(request, pk, pk2):

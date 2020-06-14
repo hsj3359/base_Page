@@ -1,5 +1,5 @@
 {% extends 'group_control/base.html' %}
-
+{% load static %}
 {% block head %}
 <!-- head 영역 -->
 <title>Group</title>
@@ -9,6 +9,7 @@
 
 {% block content %}
 <!-- content 영역 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <div class="container-fluid">
 
   <!-- Page Heading -->
@@ -21,73 +22,73 @@
 
     <!-- Earnings (Monthly) Card Example -->
     <!--<div class="col-xl-3 col-md-6 mb-4">-->
-      <!--<div class="card border-left-primary shadow h-100 py-2">-->
-        <!--<div class="card-body">-->
-          <!--<div class="row no-gutters align-items-center">-->
-            <!--<div class="col mr-2">-->
-              <!--<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">총 벌금</div>-->
-              <!--<div class="h5 mb-0 font-weight-bold text-gray-800"> {{totalPenalty}}원</div>-->
-            <!--</div>-->
-            <!--<div class="col-auto">-->
-              <!--<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div class="card border-left-primary shadow h-100 py-2">-->
+    <!--<div class="card-body">-->
+    <!--<div class="row no-gutters align-items-center">-->
+    <!--<div class="col mr-2">-->
+    <!--<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">총 벌금</div>-->
+    <!--<div class="h5 mb-0 font-weight-bold text-gray-800"> {{totalPenalty}}원</div>-->
+    <!--</div>-->
+    <!--<div class="col-auto">-->
+    <!--<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
     <!--&lt;!&ndash; Earnings (Monthly) Card Example &ndash;&gt;-->
     <!--<div class="col-xl-3 col-md-6 mb-4">-->
-      <!--<div class="card border-left-info shadow h-100 py-2">-->
-        <!--<div class="card-body">-->
-          <!--<div class="row no-gutters align-items-center">-->
-            <!--<div class="col mr-2">-->
-              <!--<div class="text-xs font-weight-bold text-info text-uppercase mb-1">운영 기간</div>-->
-              <!--<div class="row no-gutters align-items-center">-->
-                <!--<div class="col-auto">-->
-                  <!--<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{group.start | date:'Y-m-d'}}<br> ~ {{group.end | date:'Y-m-d'}}</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-auto">-->
-              <!--<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div class="card border-left-info shadow h-100 py-2">-->
+    <!--<div class="card-body">-->
+    <!--<div class="row no-gutters align-items-center">-->
+    <!--<div class="col mr-2">-->
+    <!--<div class="text-xs font-weight-bold text-info text-uppercase mb-1">운영 기간</div>-->
+    <!--<div class="row no-gutters align-items-center">-->
+    <!--<div class="col-auto">-->
+    <!--<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{group.start | date:'Y-m-d'}}<br> ~ {{group.end | date:'Y-m-d'}}</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-auto">-->
+    <!--<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
     <!--&lt;!&ndash; Pending Requests Card Example &ndash;&gt;-->
     <!--<div class="col-xl-3 col-md-6 mb-4">-->
-      <!--<div class="card border-left-warning shadow h-100 py-2">-->
-        <!--<div class="card-body">-->
-          <!--<div class="row no-gutters align-items-center">-->
-            <!--<div class="col mr-2">-->
-              <!--<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">일일 공부</div>-->
-              <!--<div class="h5 mb-0 font-weight-bold text-gray-800">2시간</div>-->
-            <!--</div>-->
-            <!--<div class="col-auto">-->
-              <!--<i class="fas fa-comments fa-2x text-gray-300"></i>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div class="card border-left-warning shadow h-100 py-2">-->
+    <!--<div class="card-body">-->
+    <!--<div class="row no-gutters align-items-center">-->
+    <!--<div class="col mr-2">-->
+    <!--<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">일일 공부</div>-->
+    <!--<div class="h5 mb-0 font-weight-bold text-gray-800">2시간</div>-->
+    <!--</div>-->
+    <!--<div class="col-auto">-->
+    <!--<i class="fas fa-comments fa-2x text-gray-300"></i>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
     <!--<div class="col-xl-3 col-md-6 mb-4">-->
-      <!--<div class="card border-left-danger shadow h-100 py-2">-->
-        <!--<div class="card-body">-->
-          <!--<div class="row no-gutters align-items-center">-->
-            <!--<div class="col mr-2">-->
-              <!--<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">코드</div>-->
-              <!--<div class="h5 mb-0 font-weight-bold text-gray-800">{{group.code}}</div>-->
-            <!--</div>-->
-            <!--<div class="col-auto">-->
-              <!--<i class="fas fa-comments fa-2x text-gray-300"></i>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div class="card border-left-danger shadow h-100 py-2">-->
+    <!--<div class="card-body">-->
+    <!--<div class="row no-gutters align-items-center">-->
+    <!--<div class="col mr-2">-->
+    <!--<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">코드</div>-->
+    <!--<div class="h5 mb-0 font-weight-bold text-gray-800">{{group.code}}</div>-->
+    <!--</div>-->
+    <!--<div class="col-auto">-->
+    <!--<i class="fas fa-comments fa-2x text-gray-300"></i>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
   </div>
@@ -105,7 +106,7 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <table id ="calendar" border="1px" style=" width : 100%; height : 100%; text-align: center;">
+          <table id="calendar" border="1px" style=" width : 100%; height : 100%; text-align: center;">
             <tr>
               <td colspan="7" id="today">오늘날짜</td>
             </tr>
@@ -135,7 +136,7 @@
 
           <h6 id="calendar_title" class="m-0 font-weight-bold text-primary">
           </h6>
-          <button type="button" ><span aria-hidden="true"data-toggle="modal" data-target="#addModal">+</span></button>
+          <button type="button"><span aria-hidden="true" data-toggle="modal" data-target="#addModal">+</span></button>
         </div>
         <!-- Card Body -->
         <div class="card-body">
@@ -154,14 +155,15 @@
             <!--</li>-->
 
             <!-- deleteModal 영역 -->
-            <div class="modal fade"  id="deleteModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <form class = "delete-form" method="post" action="{% url 'group:deleteSche' group.pk sche.pk %}">
+                  <form class="delete-form" method="post" action="{% url 'group:deleteSche' group.pk sche.pk %}">
                     {% csrf_token %}
                     <div class="modal-header">
                       <h4 class="modal-title" id="deleteModalLabel">일정 삭제</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">×</span></button>
                     </div>
                     <div class="modal-body">
                       일정을 삭제하시겠습니까?
@@ -177,14 +179,15 @@
             </div>
 
             <!-- modifyModal 영역 -->
-            <div class="modal fade"  id="modifyModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <form class = "modify-form" method="post" action="{% url 'group:modifySche' group.pk sche.pk %}">
+                  <form class="modify-form" method="post" action="{% url 'group:modifySche' group.pk sche.pk %}">
                     {% csrf_token %}
                     <div class="modal-header">
                       <h4 class="modal-title" id="modifyModalLabel">일정 수정</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          aria-hidden="true">×</span></button>
                     </div>
 
                     <div class="modal-body">
@@ -192,21 +195,27 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">제목</span>
                         </div>
-                        <input name="{{ form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control sche-title" value="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input name="{{ form.title.html_name }}" required="required" autofocus="autofocus" type="text"
+                          class="form-control sche-title" value="" aria-label="Username"
+                          aria-describedby="basic-addon1">
                       </div>
 
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">날짜</span>
                         </div>
-                        <input name="{{ form.date.html_name }}" required="required" autofocus="autofocus" type="date" class="form-control" value="{{sche.date}}" aria-label="Username" aria-describedby="basic-addon1">
+                        <input name="{{ form.date.html_name }}" required="required" autofocus="autofocus" type="date"
+                          class="form-control" value="{{sche.date}}" aria-label="Username"
+                          aria-describedby="basic-addon1">
                       </div>
 
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">시간</span>
                         </div>
-                        <input name="{{ form.time.html_name }}" required="required" autofocus="autofocus" type="time" class="form-control" value="{{sche.time}}" aria-label="Username" aria-describedby="basic-addon1">
+                        <input name="{{ form.time.html_name }}" required="required" autofocus="autofocus" type="time"
+                          class="form-control" value="{{sche.time}}" aria-label="Username"
+                          aria-describedby="basic-addon1">
                       </div>
 
 
@@ -214,7 +223,8 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">내용</span>
                         </div>
-                        <input name="{{ form.content.html_name }}" required="required" autofocus="autofocus" class="form-control sche-body" aria-label="With textarea" value="{{sche.content}}">
+                        <input name="{{ form.content.html_name }}" required="required" autofocus="autofocus"
+                          class="form-control sche-body" aria-label="With textarea" value="{{sche.content}}">
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -273,8 +283,8 @@
           <h6 class="m-0 font-weight-bold text-primary">검색</h6>
         </div>
         <div class="card-body">
-          <input type="text" placeholder="파일명 혹은 메시지를 입력하세요">
-          <button>검색</button>
+          <input id='search_text' type="text" placeholder="파일명 혹은 메시지를 입력하세요">
+          <button onclick="search()">검색</button>
         </div>
       </div>
 
@@ -286,55 +296,55 @@
 
       <!-- Project Card Example -->
       <!--<div class="card shadow mb-4">-->
-        <!--<div class="card-header py-3">-->
-          <!--<h6 class="m-0 font-weight-bold text-primary">공부량</h6>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
+      <!--<div class="card-header py-3">-->
+      <!--<h6 class="m-0 font-weight-bold text-primary">공부량</h6>-->
+      <!--</div>-->
+      <!--<div class="card-body">-->
 
-          <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>-->
-          <!--<script src="https://d3js.org/d3.v3.min.js"></script>-->
-          <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>-->
-          <!--<div id="linechart"></div>-->
-          <!--<script>-->
-          <!--var dateArray = new Array();-->
-          <!--var valueArray = new Array();-->
-          <!--{% for key, value in graph.items %}-->
-            <!--dateArray.push('{{key}}');-->
-            <!--{% for user, time in value.items %}-->
-            <!--valueArray.push(['{{user}}', '{{time}}']);-->
-            <!--{% endfor %}-->
-          <!--{% endfor %}-->
-          <!--for(var i=0;i<valueArray.length;i++){-->
-            <!--for(var j=i+1;j<valueArray.length;j++){-->
-              <!--if(valueArray[i][0]==valueArray[j][0]){-->
-                <!--valueArray[i].push(valueArray[j][1]);-->
-              <!--}-->
-            <!--}-->
-          <!--}-->
-          <!--valueArray = valueArray.slice(0, 3);-->
-          <!--var userArray = new Array();-->
-          <!--var timeArray = new Array();-->
+      <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>-->
+      <!--<script src="https://d3js.org/d3.v3.min.js"></script>-->
+      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>-->
+      <!--<div id="linechart"></div>-->
+      <!--<script>-->
+      <!--var dateArray = new Array();-->
+      <!--var valueArray = new Array();-->
+      <!--{% for key, value in graph.items %}-->
+      <!--dateArray.push('{{key}}');-->
+      <!--{% for user, time in value.items %}-->
+      <!--valueArray.push(['{{user}}', '{{time}}']);-->
+      <!--{% endfor %}-->
+      <!--{% endfor %}-->
+      <!--for(var i=0;i<valueArray.length;i++){-->
+      <!--for(var j=i+1;j<valueArray.length;j++){-->
+      <!--if(valueArray[i][0]==valueArray[j][0]){-->
+      <!--valueArray[i].push(valueArray[j][1]);-->
+      <!--}-->
+      <!--}-->
+      <!--}-->
+      <!--valueArray = valueArray.slice(0, 3);-->
+      <!--var userArray = new Array();-->
+      <!--var timeArray = new Array();-->
 
-          <!--for(var i=0;i<valueArray.length;i++){-->
-            <!--userArray.push(valueArray[i][0]);-->
-            <!--timeArray.push(valueArray[i].slice(1, 5));-->
-          <!--}-->
-          <!--var jsonData = {-->
-	            <!--date:dateArray,-->
-          <!--}-->
-          <!--for(var i=0;i<userArray.length;i++){-->
-            <!--jsonData[userArray[i]] = timeArray[i];-->
-          <!--}-->
-            <!--var chart = c3.generate({-->
-              <!--bindto: "#linechart",-->
-              <!--data: {-->
-              <!--json :jsonData,-->
-                <!--x :'date'-->
-              <!--}-->
-            <!--});-->
+      <!--for(var i=0;i<valueArray.length;i++){-->
+      <!--userArray.push(valueArray[i][0]);-->
+      <!--timeArray.push(valueArray[i].slice(1, 5));-->
+      <!--}-->
+      <!--var jsonData = {-->
+      <!--date:dateArray,-->
+      <!--}-->
+      <!--for(var i=0;i<userArray.length;i++){-->
+      <!--jsonData[userArray[i]] = timeArray[i];-->
+      <!--}-->
+      <!--var chart = c3.generate({-->
+      <!--bindto: "#linechart",-->
+      <!--data: {-->
+      <!--json :jsonData,-->
+      <!--x :'date'-->
+      <!--}-->
+      <!--});-->
 
-          <!--</script>-->
-        <!--</div>-->
+      <!--</script>-->
+      <!--</div>-->
       <!--</div>-->
     </div>
   </div>
@@ -343,14 +353,15 @@
 <!-- /content 영역 -->
 
 <!-- addmodal 영역 -->
-<div class="modal fade"  id="addModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form method="post" action="{% url 'group:createSche' group.pk%}">
         {% csrf_token %}
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">일정 추가</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">×</span></button>
         </div>
 
         <div class="modal-body">
@@ -358,21 +369,24 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">제목</span>
             </div>
-            <input name="{{ form.title.html_name }}" required="required" autofocus="autofocus" type="text" class="form-control" placeholder="일정 제목" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ form.title.html_name }}" required="required" autofocus="autofocus" type="text"
+              class="form-control" placeholder="일정 제목" aria-label="Username" aria-describedby="basic-addon1">
           </div>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">날짜</span>
             </div>
-            <input name="{{ form.date.html_name }}" required="required" autofocus="autofocus" type="date" class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ form.date.html_name }}" required="required" autofocus="autofocus" type="date"
+              class="form-control" placeholder="date input" aria-label="Username" aria-describedby="basic-addon1">
           </div>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">시간</span>
             </div>
-            <input name="{{ form.time.html_name }}" required="required" autofocus="autofocus" type="time" class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
+            <input name="{{ form.time.html_name }}" required="required" autofocus="autofocus" type="time"
+              class="form-control" placeholder="시간" aria-label="Username" aria-describedby="basic-addon1">
           </div>
 
 
@@ -380,7 +394,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text">내용</span>
             </div>
-            <input name="{{ form.content.html_name }}" required="required" autofocus="autofocus" class="form-control" aria-label="With textarea">
+            <input name="{{ form.content.html_name }}" required="required" autofocus="autofocus" class="form-control"
+              aria-label="With textarea">
           </div>
         </div>
         <div class="modal-footer">
@@ -392,10 +407,49 @@
     </div>
   </div>
 </div>
-<script>
-//  일정 수정과 삭제 모달에 관한 코드
 
-  function openModifyModal(title, content, url){
+<!-- 검색모달 영역 -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="searchModal_head">모달 타이틀</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <div id='file'>
+          <h1>파일</h1>
+          <ul class="list-group search-post-box">
+            <!--<li class="list-group-item"><a href="#">진수존잘.jpg</a></li>-->
+            <!--<li class="list-group-item"><a href="#">진수일기.txt</a></li>-->
+            <!--<li class="list-group-item"><a href="#">진수 흑역사.jpg</a></li>-->
+          </ul>
+        </div>
+        <hr width="100%">
+        <div id='measege'>
+          <h1>메세지</h1>
+          <ul class="list-group search-message-box">
+
+            <!--<li class="list-group-item"><a href="#">야 내가 다한다 비켜</a>-->
+              <!--<ul>-->
+                <!--<li> 작성자 : 진수</li>-->
+                <!--<li> 회의방 : 욕방</li>-->
+              <!--</ul>-->
+            <!--</li>-->
+
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModifyModal(title, content, url) {
     var modal_id = document.getElementById("modifyModal");
     var sche_title = modal_id.querySelector(".sche-title");
     var sche_body = modal_id.querySelector(".sche-body");
@@ -409,7 +463,7 @@
     $('#modifyModal').modal('show');
   }
 
-  function openDeleteModal(url){
+  function openDeleteModal(url) {
     var modal_id = document.getElementById("deleteModal");
     var modal_form = modal_id.querySelector(".delete-form");
 
@@ -419,180 +473,106 @@
   }
 </script>
 <script>
-//일정 출력에 관한 부분
-  function clickCal(num){
-  // 달력을 누르면 일정 날짜가 바뀌면서 일정 목록도 날짜에 따라 변경하는 함수
+  //일정 출력에 관한 부분
+  function clickCal(num) {
+    // 달력을 누르면 일정 날짜가 바뀌면서 일정 목록도 날짜에 따라 변경하는 함수
     var month = today.getMonth() + 1; // 현재 달
-    if(month<10) month = '0' + month; // 달이 10보다 작은 경우, 앞에 0을 붙임
-    if(num<10) num = '0' + num;       // 일이 10보다 작은 경우, 앞에 0을 붙임, 앞에 0을 붙이는 이유는 일정 날짜와 비교하기 편해서
+    if (month < 10) month = '0' + month; // 달이 10보다 작은 경우, 앞에 0을 붙임
+    if (num < 10) num = '0' + num;       // 일이 10보다 작은 경우, 앞에 0을 붙임, 앞에 0을 붙이는 이유는 일정 날짜와 비교하기 편해서
 
-    var str = today.getFullYear() + "-" + month + "-"+num+ "  일정" // 클릭한 날짜
+    var str = today.getFullYear() + "-" + month + "-" + num + "  일정" // 클릭한 날짜
     document.getElementById('calendar_title').innerHTML = str;
 
     var sche = new Array();
     {% for s in schedule %}
-      var sche_dict = {};
-      sche_dict["title"] = "{{s.title}}";
-      sche_dict["date"] = "{{s.date | date:'Y-m-d'}}";
-      sche_dict["content"] = "{{s.content}}";
-      sche_dict["modify_url"] = "{% url 'group:modifySche' group.pk s.pk %}";
-      sche_dict["delete_url"] = "{% url 'group:deleteSche' group.pk s.pk %}";
-      sche.push(sche_dict);
+    var sche_dict = {};
+    sche_dict["title"] = "{{s.title}}";
+    sche_dict["date"] = "{{s.date | date:'Y-m-d'}}";
+    sche_dict["content"] = "{{s.content}}";
+    sche_dict["modify_url"] = "{% url 'group:modifySche' group.pk s.pk %}";
+    sche_dict["delete_url"] = "{% url 'group:deleteSche' group.pk s.pk %}";
+    sche.push(sche_dict);
     {% endfor %}
 
 
 
-    if(document.querySelector(".list-sche")){
-    // 다른 날짜를 클릭할 시 , 이미 표시되던 일정을 다시 숨김
-        var curr_sche = document.querySelectorAll(".list-sche");
-        for(var i=0;i<curr_sche.length;i++){
-          curr_sche[i].remove();
-        }
+    if (document.querySelector(".list-sche")) {
+      // 다른 날짜를 클릭할 시 , 이미 표시되던 일정을 다시 숨김
+      var curr_sche = document.querySelectorAll(".list-sche");
+      for (var i = 0; i < curr_sche.length; i++) {
+        curr_sche[i].remove();
+      }
     }
 
-    for(var i=0;i<sche.length;i++){
-    if(str.indexOf(sche[i]["date"])==0){
-    // 클릭한 날짜와 일정 날짜가 같은 경우, 그 일정을 표시
+    for (var i = 0; i < sche.length; i++) {
+      if (str.indexOf(sche[i]["date"]) == 0) {
+        // 클릭한 날짜와 일정 날짜가 같은 경우, 그 일정을 표시
 
-    var list_group = document.querySelector(".list-group");
+        var list_group = document.querySelector(".list-group");
 
-    var list = document.createElement("li");
-    list.classList.add("list-group-item");
-    list.classList.add("list-sche");
-    var h3 = document.createElement("h3");
-    var span = document.createElement("span");
-    span.id = "sche_date";
-    span.innerHTML = sche[i]["title"];
-    h3.appendChild(span);
-    list.appendChild(h3);
+        var list = document.createElement("li");
+        list.classList.add("list-group-item");
+        list.classList.add("list-sche");
+        var h3 = document.createElement("h3");
+        var span = document.createElement("span");
+        span.id = "sche_date";
+        span.innerHTML = sche[i]["title"];
+        h3.appendChild(span);
+        list.appendChild(h3);
 
-    var title = sche[i]["title"].replace(/\s/gi,"_");
-    var content = sche[i]["content"].replace(/\s/gi,"_");
-    var modify_url = sche[i]["modify_url"]
-    var delete_url = sche[i]["delete_url"]
+        var title = sche[i]["title"].replace(/\s/gi, "_");
+        var content = sche[i]["content"].replace(/\s/gi, "_");
+        var modify_url = sche[i]["modify_url"]
+        var delete_url = sche[i]["delete_url"]
 
-    // 삭제 버튼
-    var style = "'float: right; cursor: pointer; color:red;'"
-    var toggle = "'modal'";
-    var target = "'#deleteModal'";
-    var onclick = "openDeleteModal('"+delete_url+"')";
-    var str_delete = "<span style=" + style + " data-toggle=" + toggle +
-      "data-target="+ target +" onclick="+ onclick +">X</span>";
-    h3.innerHTML += str_delete;
+        // 삭제 버튼
+        var style = "'float: right; cursor: pointer; color:red;'"
+        var toggle = "'modal'";
+        var target = "'#deleteModal'";
+        var onclick = "openDeleteModal('" + delete_url + "')";
+        var str_delete = "<span style=" + style + " data-toggle=" + toggle +
+          "data-target=" + target + " onclick=" + onclick + ">X</span>";
+        h3.innerHTML += str_delete;
 
-    // 수정 버튼
-    var style = "'margin-right: 5px; float: right; cursor: pointer;'"
-    var toggle = "'modal'";
-    var target = "'#modifyModal'";
-    var onclick = "openModifyModal('"+title+"','"+content+"','"+modify_url+"')";
-    var str_modify = "<span style=" + style + " data-toggle=" + toggle +
-      "data-target="+ target +" onclick="+ onclick +"><i class='fas fa-pen'></i></span>";
-    h3.innerHTML += str_modify;
+        // 수정 버튼
+        var style = "'margin-right: 5px; float: right; cursor: pointer;'"
+        var toggle = "'modal'";
+        var target = "'#modifyModal'";
+        var onclick = "openModifyModal('" + title + "','" + content + "','" + modify_url + "')";
+        var str_modify = "<span style=" + style + " data-toggle=" + toggle +
+          "data-target=" + target + " onclick=" + onclick + "><i class='fas fa-pen'></i></span>";
+        h3.innerHTML += str_modify;
 
-    var ul = document.createElement("ul");
-    var li = document.createElement("li");
-    li.innerHTML = sche[i]["content"];
-    ul.appendChild(li);
-    list.appendChild(ul);
+        var ul = document.createElement("ul");
+        var li = document.createElement("li");
+        li.innerHTML = sche[i]["content"];
+        ul.appendChild(li);
+        list.appendChild(ul);
 
-    list_group.appendChild(list);
-    }
+        list_group.appendChild(list);
+      }
     }
   }
 
   var today = new Date();
   clickCal(today.getDate());
 
-</script>
-<script>
-// 달력에 관한 코드
-
-  function build() {
-    var today = new Date(); // 오늘 날짜
-    var date = new Date();
-
-    var sche = new Array();
+  var sche = new Array();
     {% for s in schedule %}
-      sche.push(new Date("{{s.date | date:'Y-m-d'}}"));
+    sche.push(new Date("{{s.date | date:'Y-m-d'}}"));
     {% endfor %}
-
-    var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
-    var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
-    var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
-    var yearmonth = document.getElementById("today"); //  년도와 월 출력할곳
-    yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
-
-    // 남은 테이블 줄 삭제
-    while (tbcal.rows.length > 2) {
-      tbcal.deleteRow(tbcal.rows.length - 1);
-    }
-
-    var row = null;
-    row = tbcal.insertRow();
-    var cnt = 0;
-
-    // 1일 시작칸 찾기
-    for (i = 0; i < nMonth.getDay(); i++) {
-      cell = row.insertCell();
-      cnt = cnt + 1;
-    }
-
-    // 달력 출력
-    for (i = 1; i <= lastDate.getDate(); i++) { // 1일부터 마지막 일까지
-      cell = row.insertCell();
-      cell.setAttribute( 'onclick', 'clickCal('+i+')');
-      cell.setAttribute( 'style', 'cursor: pointer;');
-      cell.innerHTML = i;
-      cnt = cnt + 1;
-
-      if (cnt % 7 == 1) {//일요일 계산
-        cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
-      }
-
-      if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-        cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
-        row = calendar.insertRow();// 줄 추가
-      }
-
-      for(var j=0;j<sche.length;j++){
-        if(sche[j].getFullYear()==date.getFullYear()&&sche[j].getMonth()==date.getMonth()&&i==sche[j].getDate()) {
-          cell.bgColor = "#ffffce"; //오늘날짜배경색
-        }
-      }
-
-      if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) {
-        cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-      }
-    }
-
-    while(cnt%7!=0) {
-      cell = row.insertCell();
-      cell.innerHTML = "";
-      cnt = cnt + 1;
-
-      if (cnt % 7 == 1) {//일요일 계산
-        cell.innerHTML = "";//일요일에 색
-      }
-
-      if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-        cell.innerHTML = "" ;//토요일에 색
-        row = calendar.insertRow();// 줄 추가
-      }
-
-      if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) {
-        cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-      }
-
-      for(var j=0;j<sche.length;j++){
-        if(sche[j].getFullYear()==date.getFullYear()&&sche[j].getMonth()==date.getMonth()&&i==date.getDate()) {
-          cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-        }
-      }
-    }
-  }
-
-  build();
 </script>
+<script src="{% static 'js/calendar.js' %}?ver=1"></script>
+<script>
+  var postData = [];
+  var chatData = [];
+  {% for p in post %}
+  postData.push({"title":"{{p.title}}", "author":"{{p.author}}", "photo":"{{p.photo}}", "photo-url":"{{p.photo.url}}" });
+  {% endfor %}
+  {% for c in chat %}
+  chatData.push({"message":"{{c.message}}", "author":"{{c.author}}", "room":"{{c.room.title}}", "url" : "/group/{{group.pk}}/chat/{{c.room.pk}}"});
+  {% endfor %}
+</script>
+<script src="{% static 'js/search.js' %}?ver=1"></script>
+
 {% endblock %}
-
-
