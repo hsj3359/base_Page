@@ -15,13 +15,18 @@ def index(request):
         join = Join.objects.filter(user=request.user)
         createGroupForm = CreateGroupForm()
         joinGroupForm = JoinGroupForm()
-        schedule = Schedule.objects.filter(user=request.user)
+        schedule = []
+        for j in join:
+            schedules = Schedule.objects.filter(studyGroup=j.studyGroup)
+            for s in schedules:
+                schedule.append(s)
+        print(schedule)
         dict = {
             'user': user,
             'join': join,
             'createGroupForm': createGroupForm,
             'joinGroupForm': joinGroupForm,
-            'schedule': schedule,
+            'schedule': schedule
         }
     return  render(request, 'main/main.html', dict)
 

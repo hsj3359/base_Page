@@ -39,6 +39,7 @@ chatSocket.onmessage = function (e) {
         </div>
       </div>`;
   }
+  autoScroll();
 };
 
 // WebSocket 연결

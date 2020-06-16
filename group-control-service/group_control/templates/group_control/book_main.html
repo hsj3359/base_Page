@@ -3,17 +3,17 @@
 {% block head %}
 <title>Book</title>
 <style>
-      pre {
-        background-color: whitesmoke;
-      }
+  pre {
+    background-color: whitesmoke;
+  }
 </style>
 {% endblock %}
 
 {% block content %}
 
 <div class="container-fluid">
-  <button style="float: right;" onclick="markDown()">MarkDown</button>
-  <button style="float: right;" onclick="origin()">일반</button>
+  <button class="btn btn-primary mr-3" id='markDownBtn' style="float: right;" onclick="markDown()">MarkDown</button>
+  <button class="btn btn-primary mr-3" id='normalBtn' style="float: right; background-color: red;" onclick="origin()">일반</button>
   <div id='head'>
     <H1>{{book.title}}</H1>
     <hr style="width: 100%;">
@@ -24,17 +24,31 @@
   <script>
     var contents = document.getElementById("contents");
     var str = "{{book.content|linebreaksbr}}";
+    var button = false;
     contents.innerHTML = str;
 
     console.log(str);
-
+    var originBtn = document.getElementById('normalBtn');
+    var mkdown = document.getElementById('markDownBtn');
     function origin() {
       contents.innerHTML = str;
+      mkdown.style.backgroundColor = '';
+      originBtn.style.backgroundColor = 'red';
+      button = false;
     }
     function markDown() {
-      var a = contents.innerText;
-      contents.innerHTML = marked(a);
+      if (button == false) {
+        //처음 누를 경우
+        var a = contents.innerText;
+        contents.innerHTML = marked(a);
+        mkdown.style.backgroundColor = 'red';
+        originBtn.style.backgroundColor = '';
+        button = true;
+      }
+
+
     }
+
 
   </script>
 
