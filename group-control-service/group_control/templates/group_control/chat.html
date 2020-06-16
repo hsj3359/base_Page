@@ -176,6 +176,12 @@
     var otherChatTopUrl = '{% static 'img/talk_top2.png' %}';
     var otherChatMidUrl = '{% static 'img/talk_main2.png' %}';
     var otherChatBotUrl = '{% static 'img/talk_bot2.png' %}';
+
+    function autoScroll() {
+    var scroll = document.getElementById('chat');
+    scroll.scrollTop = scroll.scrollHeight;
+  }
+
 </script>
 <script src="{% static 'js/websock.js' %}?ver=1"></script>
 <script src="{% static 'js/chat_ajax.js' %}?ver=1"></script>

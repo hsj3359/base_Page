@@ -1,7 +1,7 @@
 //  일정 수정과 삭제 모달에 관한 코드
   function search() {
     var head = document.getElementById("searchModal_head");
-    var search = document.getElementById('search_text').value;
+    var search = document.getElementById('search-text').value;
     var smb = document.querySelector('.search-message-box');
     var spb = document.querySelector('.search-post-box');
 

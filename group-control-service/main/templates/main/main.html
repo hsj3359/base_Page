@@ -32,7 +32,7 @@
             <tbody>
             {% for j in join%}
             <tr><!--이부분은 DB에서 가져와야됨-->
-              <td onClick = "location.href='/group/{{j.studyGroup.pk}}/'"><!--이부분은 지금은 모두 index로-->{{j.studyGroup.title}}</td>
+              <td onClick = "location.href='/group/{{j.studyGroup.pk}}/'" style="cursor: pointer;">{{j.studyGroup.title}}</td>
               <td>{{j.studyGroup.groupType}}</td>
               <td>{{j.studyGroup.start | date:'Y-m-d'}} ~ {{j.studyGroup.end | date:'Y-m-d'}}</td>
             </tr>

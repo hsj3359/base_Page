@@ -283,8 +283,11 @@
           <h6 class="m-0 font-weight-bold text-primary">검색</h6>
         </div>
         <div class="card-body">
-          <input id='search_text' type="text" placeholder="파일명 혹은 메시지를 입력하세요">
-          <button onclick="search()">검색</button>
+          <div class="input-group">
+            <input type="text" class="form-control" id="search-text">
+            <button class="btn btn-primary" onclick="search()">검색</button>
+          </div>
+
         </div>
       </div>
 
@@ -564,14 +567,15 @@
 </script>
 <script src="{% static 'js/calendar.js' %}?ver=1"></script>
 <script>
-  var postData = [];
-  var chatData = [];
+  var postData = new Array();
+  var chatData = new Array();
   {% for p in post %}
   postData.push({"title":"{{p.title}}", "author":"{{p.author}}", "photo":"{{p.photo}}", "photo-url":"{{p.photo.url}}" });
   {% endfor %}
   {% for c in chat %}
-  chatData.push({"message":"{{c.message}}", "author":"{{c.author}}", "room":"{{c.room.title}}", "url" : "/group/{{group.pk}}/chat/{{c.room.pk}}"});
+  chatData.push({"message":"{{c.message|linebreaks}}", "author":"{{c.author}}", "room":"{{c.room.title}}", "url" : "/group/{{group.pk}}/chat/{{c.room.pk}}"});
   {% endfor %}
+  console.log(postData)
 </script>
 <script src="{% static 'js/search.js' %}?ver=1"></script>
 
